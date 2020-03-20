@@ -35,6 +35,7 @@ function ScreenGame(props) {
     //vérifier si User est connecté (store Redux)
     if(props.tokenToDisplay === ""){
       setRedirection(false)
+      return <Redirect to="/"  />
     }
     } 
     fetchdata()

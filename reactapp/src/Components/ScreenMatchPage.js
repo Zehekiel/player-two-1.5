@@ -4,7 +4,7 @@ import {
   Row, Container, CardBody, Spinner , Progress
 } from 'reactstrap';
 import { Col } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux';
 
 
@@ -18,7 +18,9 @@ function ScreenMatchPage(props) {
   useEffect( () => {
     console.log("token matchpage ", props.tokenToDisplay);
     
-
+    if (!props.tokenToDisplay){
+      return <Redirect to="/"  />
+    }
 
     if (props.tokenToDisplay){
       async function fetchdata (){

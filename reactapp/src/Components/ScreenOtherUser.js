@@ -3,6 +3,8 @@ import {Col, Row, Card, CardTitle, CardText,CardSubtitle, CardBody, Spinner,
 Table, Button,} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
+
 
 function ScreenOtherUser(props) {
   const [userId, setUserId]= useState('')
@@ -19,6 +21,9 @@ function ScreenOtherUser(props) {
       setP2Id(props.match.params.p2id)
     }
     
+    if (!props.tokenToDisplay){
+      return <Redirect to="/"  />
+    }
 
 console.log("je passe bien à ScreenOtherUser")
 console.log("props.params.p2id", props.match.params.p2id)
