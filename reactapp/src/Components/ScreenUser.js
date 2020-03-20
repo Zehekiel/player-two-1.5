@@ -93,8 +93,6 @@ function ScreenUser(props) {
     const [listErrors, setListErrors] = useState([])
 
 
-
-
   //la fonction d'appel MongoDB pour les UserData
   useEffect(() => {
     if(props.tokenToDisplay){

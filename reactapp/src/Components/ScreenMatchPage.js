@@ -16,10 +16,6 @@ function ScreenMatchPage(props) {
   const [error, setError]= useState('')
 
   useEffect( () => {
-    
-    if (!props.tokenToDisplay){
-      return <Redirect to="/"  />
-    }
 
     if (props.tokenToDisplay){
       async function fetchdata (){
@@ -55,6 +51,10 @@ function ScreenMatchPage(props) {
     fetchdata()
   }
     }, [props.tokenToDisplay, props])
+
+    if (!props.tokenToDisplay){
+      return <Redirect to="/"  />
+    }
 
     //AJOUTER UN P2
     async function handleClickAddMatch (addP2) {

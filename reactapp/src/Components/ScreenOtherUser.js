@@ -3,7 +3,7 @@ import {Col, Row, Card, CardTitle, CardText,CardSubtitle, CardBody, Spinner,
 Table, Button,} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 
 function ScreenOtherUser(props) {
@@ -32,6 +32,9 @@ function ScreenOtherUser(props) {
     fetchdata()
     }, [props.userId, props ])
 
+    if (!props.tokenToDisplay){
+      return <Redirect to="/"  />
+    }
 
 if(P2 !== "" ){
   var serviceList = []

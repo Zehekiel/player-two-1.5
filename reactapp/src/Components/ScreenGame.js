@@ -21,24 +21,24 @@ function ScreenGame(props) {
   const [searchGameList, setSearchGameList] = useState([])
   const [modalShow, setModalShow] = useState(false)
 
+
+
   // ___________ useEffect ___________
   useEffect( () => {
     
 
     async function fetchdata (){
-    // plateform from back
-    const platerformResponse = await fetch("/plateform");
-    const response = await platerformResponse.json()
-    setPlateformList(response)
+      // plateform from back
+      const platerformResponse = await fetch("/plateform");
+      const response = await platerformResponse.json()
+      setPlateformList(response)
+      } 
+      fetchdata()
+    }, [props.tokenToDisplay, props])
 
-    //vérifier si User est connecté (store Redux)
-    if(props.tokenToDisplay === ""){
-      setRedirection(false)
+    if (!props.tokenToDisplay){
       return <Redirect to="/"  />
     }
-    } 
-    fetchdata()
-    }, [props.tokenToDisplay, props])
 
   //afficher les services par défaut attaché à la plateforme
     const handlePlateformeSelect = async (clickPlateform) => {
