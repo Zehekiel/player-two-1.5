@@ -99,16 +99,14 @@ function ScreenUser(props) {
   useEffect(() => {
     console.log("props.token userpage ", props.tokenToDisplay);
     if(props.tokenToDisplay){
-      setToken(props.tokenToDisplay)
+      // setToken(props.tokenToDisplay)
     }
   
 
-  console.log("token avant", token);
   //vérifier si User est connecté (store Redux)
   if(props.tokenToDisplay){
       console.log("passe par non null");
       
-      console.log("token après", token);
       //si oui récupérer ses info dans DBA
       async function userData(){
         const response = await fetch('/users/finduser', {
@@ -314,7 +312,7 @@ function ScreenUser(props) {
       const data = await fetch('/users/usermanager', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `pseudoFromFront=${newPseudo}&token=${/*props.*/token}&mailFromFront=${newMail}&passwordFromFront=${newPassword}&cpFromFront=${newCP}&avatarFromFront=${newAvatar}` /*&langueFromFront=${language}&*/
+        body: `pseudoFromFront=${newPseudo}&token=${props.token}&mailFromFront=${newMail}&passwordFromFront=${newPassword}&cpFromFront=${newCP}&avatarFromFront=${newAvatar}` /*&langueFromFront=${language}&*/
       })
       const body = await data.json()
 
