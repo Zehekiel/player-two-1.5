@@ -14,20 +14,11 @@ function ScreenOtherUser(props) {
 
 
   useEffect(() => {
-    // console.log('props.p2', props.p2);
-    // console.log("props.userId", props.userId);
     setUserId(props.tokenToDisplay)
     if(props.match.params.p2id){
       setP2Id(props.match.params.p2id)
     }
     
-    if (!props.tokenToDisplay){
-      return <Redirect to="/"  />
-    }
-
-console.log("je passe bien à ScreenOtherUser")
-console.log("props.params.p2id", props.match.params.p2id)
-
 
     async function fetchdata (){
       const response = await fetch('/users/findP2',{
@@ -35,13 +26,12 @@ console.log("props.params.p2id", props.match.params.p2id)
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `P2Id=${props.match.params.p2id}`})
       const findP2 = await response.json()
-      console.log("findP2 otheruser",findP2)
+      // console.log("findP2 otheruser",findP2)
       setP2(findP2)
     }
     fetchdata()
     }, [props.userId, props ])
 
-console.log("P2___________", P2);
 
 if(P2 !== "" ){
   var serviceList = []
@@ -50,8 +40,7 @@ if(P2 !== "" ){
       <CardText style={{marginLeft:20}}><span style={{fontWeight:"bold"}}>{P2.service[i].service}</span>: <span style={{fontStyle:"italic"}}> {P2.service[i].tag} </span>  </CardText>
     )
   }
-  
-  
+
 
   var GameList = []
   for (var j=0; j<P2.idGame.length; j++){
@@ -63,7 +52,7 @@ if(P2 !== "" ){
         </tr>
     )
   }
-console.log(GameList);
+
 
     //AJOUTER UN P2
     async function handleClickAddMatch (P2Id) {
@@ -73,7 +62,7 @@ console.log(GameList);
         body: `idP2=${props.match.params.p2id}&&userId=${userId}`
       });
       const backResponse = await response.json()
-      console.log("backResponse", backResponse);
+      // console.log("backResponse", backResponse);
       if(backResponse.result === true){
       }
     }

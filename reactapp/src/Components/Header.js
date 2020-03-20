@@ -459,6 +459,7 @@ function CustomIconSwitch (props) {
       console.log("modalShow",modalShow);
       console.log("checked",checked);
       props.logout()
+      return  <Redirect to='/'/>
     } else {
       setChecked(false)
       setModalShow(false)

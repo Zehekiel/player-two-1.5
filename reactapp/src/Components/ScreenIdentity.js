@@ -35,7 +35,6 @@ const ScreenIdentity = (props) => {
       props.addToken(props.token)
     }
     findToken();
-    console.log("token", props.token);
   }, [props.token, props]);
 
   if(token){
@@ -50,7 +49,6 @@ const ScreenIdentity = (props) => {
       body: `pseudoFromFront=${signUpPseudo}&passwordFromFront=${signUpPassword}&mailFromFront=${signUpEmail}&birthdayFromFront=${birthDate}&cpFromFront=${country}&sexeFromFront=${gender}&langueFromFront=${language}&avatarFromFront=${avatar}`
     })
     const body = await data.json()
-    console.log("body", body.token);
     
     if(body.result === true){
       setUserExists(true)

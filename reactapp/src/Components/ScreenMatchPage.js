@@ -16,7 +16,6 @@ function ScreenMatchPage(props) {
   const [error, setError]= useState('')
 
   useEffect( () => {
-    console.log("token matchpage ", props.tokenToDisplay);
     
     if (!props.tokenToDisplay){
       return <Redirect to="/"  />
@@ -31,8 +30,7 @@ function ScreenMatchPage(props) {
         body: `token=${props.tokenToDisplay}`
       });
       const matchResponse = await response.json()
-      console.log("matchResponse ",matchResponse);
-      console.log("matchResponse matchList ",matchResponse.matchList);
+      // console.log("matchResponse ",matchResponse);
 
       setMatchList(matchResponse.matchList);
     
@@ -50,7 +48,7 @@ function ScreenMatchPage(props) {
         body: `token=${props.tokenToDisplay}`
       });
       const userResponse = await findUserResponse.json()
-      console.log("userResponse", userResponse.userFind);
+      // console.log("userResponse", userResponse.userFind);
       SetUser(userResponse.userFind)
     }
     
@@ -66,11 +64,8 @@ function ScreenMatchPage(props) {
         body: `idP2=${addP2._id}&&token=${props.tokenToDisplay}`
       });
       const backResponse = await response.json()
-      console.log("backResponse", backResponse);
+      // console.log("backResponse", backResponse);
       if(backResponse.result === true){
-        
-        // setDisplay('none')
-        // console.log(display);
         
       }
     }
@@ -91,14 +86,9 @@ function ScreenMatchPage(props) {
       var newMatchList = matchList.sort(function(a, b){
         return b.idGame.length - a.idGame.length
       })
-      console.log("newMatchList", newMatchList);
-      console.log("user", user);
-      console.log("user idgame length", user.idGame.length);
+      // console.log("newMatchList", newMatchList);
       
-    //   console.log("matchList.service", matchList[1].service);
-    //   console.log("matchList plateforme", matchList[0]);
 
-    
 
 
     // ____________________________________ RETURN ____________________________________

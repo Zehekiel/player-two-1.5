@@ -180,7 +180,6 @@ function ScreenHome() {
       //récupérer les jeux prisé sur P2
         const response = await fetch('/top5fromP2');
         const top5fromP2 = await response.json()
-        console.log("top5fromP2 ", top5fromP2);
         setTop5(top5fromP2)
     }
     findArticle()

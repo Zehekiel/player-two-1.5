@@ -23,7 +23,6 @@ function ScreenGame(props) {
 
   // ___________ useEffect ___________
   useEffect( () => {
-    console.log("token 1 ", props.tokenToDisplay);
     
 
     async function fetchdata (){
@@ -50,7 +49,6 @@ function ScreenGame(props) {
         body: `plateformSelect=${clickPlateform}`
       });
       const response = await serviceResponse.json()
-      console.log("serviceresponse", response );
       setServiceSelect(response.service[0])
 
       const usersresponse = await fetch('/users/finduser', {
@@ -59,7 +57,7 @@ function ScreenGame(props) {
         body: `token=${props.tokenToDisplay}`
       });
       const userResponse = await usersresponse.json()
-      console.log("userResponse ",userResponse.userFind);
+      // console.log("userResponse ",userResponse.userFind);
 
       if(userResponse.userFind.service[0]){
         setTag(userResponse.userFind.service[0].tag)
@@ -83,7 +81,7 @@ function ScreenGame(props) {
       });
   
     var searchGameresponse = await response.json()
-    console.log("searchGameresponse",searchGameresponse);
+    // console.log("searchGameresponse",searchGameresponse);
 
     //vérifier si chaque jeux from APi a un Cover
     for(var i = 0; i<searchGameresponse.length; i++){
@@ -95,7 +93,6 @@ function ScreenGame(props) {
     }
     
     if (searchGameresponse) {
-      console.log("passe par if searchGameresponse");
       setSearchGameList(searchGameresponse)
       setModalShow(true)
       searchGameresponse = false
@@ -104,7 +101,6 @@ function ScreenGame(props) {
 
     // ___________ CLIC ADD sur un jeux de la liste proposé par l'API
     const handleGameSelect = (gameselect) => {
-      console.log("gameselect ",gameselect);
       setGameName(gameselect.name)
       setCover(gameselect.cover.url)
       setAddGame(gameselect)
@@ -112,8 +108,6 @@ function ScreenGame(props) {
       setModalShow(false)
       // mapDispatchToProps(gameListSelected)
     }
-    console.log("gameListSelected ",gameListSelected);
-    console.log("addGame.cover.url", addGame);
     
     var iconGameSelected
     var gifchosen
@@ -137,9 +131,6 @@ function ScreenGame(props) {
     // ___________ ON CLICK START ___________
     async function OnclickStartGame(){
       
-      console.log("serviceselect", serviceSelect);
-      console.log("tag", tag);
-
       //envoyer le jeux au back
       const gameResponse =await fetch('/addgame', {
         method: 'POST',
@@ -147,14 +138,11 @@ function ScreenGame(props) {
         body: `plateform=${plateformSelect}&&name=${gameName}&&cover=${cover}&&service=${serviceSelect}&&tag=${tag}&&token=${props.tokenToDisplay}`
       });
       const response = await gameResponse.json()
-      console.log("gameresponse", response);
       //récupérer result from back pour redirect ou non
       if (response){
         setRedirection(true)
       }
     };
-
-console.log(Redirection);
 
     // redirect ou non selon réponse du back
     if(Redirection){

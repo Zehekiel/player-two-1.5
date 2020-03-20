@@ -97,7 +97,6 @@ function ScreenUser(props) {
 
   //la fonction d'appel MongoDB pour les UserData
   useEffect(() => {
-    console.log("props.token userpage ", props.tokenToDisplay);
     if(props.tokenToDisplay){
       // setToken(props.tokenToDisplay)
     }
@@ -105,7 +104,6 @@ function ScreenUser(props) {
 
   //vérifier si User est connecté (store Redux)
   if(props.tokenToDisplay){
-      console.log("passe par non null");
       
       //si oui récupérer ses info dans DBA
       async function userData(){
@@ -115,7 +113,7 @@ function ScreenUser(props) {
           body: `token=${props.tokenToDisplay}`
         });
         const userResponse = await response.json()
-        console.log("useeffect userResponse ", userResponse );
+        // console.log("useeffect userResponse ", userResponse );
 
 
         // setDescription(userResponse.userFind.description)
@@ -180,7 +178,7 @@ function ScreenUser(props) {
       body: `token=${props.tokenToDisplay}&gameId=${game}`
     });
     const supprResponse = await response.json()
-    console.log('supprResponse ', supprResponse)
+    // console.log('supprResponse ', supprResponse)
     setUserGamesList(supprResponse.idGame)
   }
 
@@ -192,7 +190,7 @@ function ScreenUser(props) {
       body: `token=${props.tokenToDisplay/*token*/}&p2=${P2}`
     });
     const supprP2Response = await response.json()
-    console.log('supprP2Response ', supprP2Response)
+    // console.log('supprP2Response ', supprP2Response)
     setPlayerTwo(supprP2Response.playertwo)
     if (playerTwo.length === 0){
       setPlayerTwo([])
@@ -209,8 +207,6 @@ function ScreenUser(props) {
     }
     if(listSuccess.length>0){
       var ListSuccessMap = listSuccess[0]
-      console.log("listSuccess nestedmodal", listSuccess[0]);
-      
       var tabListSuccess = ListSuccessMap.map((success,i) => {
         return (
           <div key={i}>
@@ -316,8 +312,6 @@ function ScreenUser(props) {
       })
       const body = await data.json()
 
-      console.log("body", body);
-      console.log("body success", body.success);
       // affiche newpseudo si modifier
       if(body.userFind.pseudo){
         setPseudo(body.userFind.pseudo)
@@ -338,16 +332,13 @@ function ScreenUser(props) {
 
       // afficher les erreurs du back s'il y en a
       if(body.error.length>0){
-        console.log("----passe par body error----");
         setListErrors([...listErrors, body.error]);
         // sinon afficher les modifications faite en back avec succès, s'il y en a
       } else if (body.success.length>0){
-        console.log("----passe par body body.success----");
         setListSuccess([...listSuccess, body.success]);
         toggleNested()
         // sinon fermer la modal et réinitialiser la listErrors
       } else {
-        console.log("----passe par else----")
         setListErrors([])
         props.onHide()
       }
@@ -372,7 +363,6 @@ function ScreenUser(props) {
         )
       })
     }
-    console.log("new Avatar ", newAvatar);
 
     function ClickSetAvatar(){
       setuserManagementModal(false)
