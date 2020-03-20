@@ -78,7 +78,7 @@ function ScreenUser(props) {
     const [playerTwo, setPlayerTwo] = useState([])
     const [avatar, setAvatar]= useState(require("../images/P1.svg"))
     const [newAvatar, setNewAvatar] = useState('')
-    const [token, setToken]= React.useState("VTfCgktjclTvW1V0UR6vOdeRYVKs0IPq") /*redux15 */
+    // const [token, setToken]= React.useState("VTfCgktjclTvW1V0UR6vOdeRYVKs0IPq") /*redux15 */
     const [mail, setMail] = useState("")
     const [CP, setCP] = useState("")
     const [myArticlesList, setMyArticlesList] = useState ([])
@@ -105,7 +105,7 @@ function ScreenUser(props) {
 
   console.log("token avant", token);
   //vérifier si User est connecté (store Redux)
-  if(/*props.tokenToDisplay*/ token){
+  if(props.tokenToDisplay){
       console.log("passe par non null");
       
       console.log("token après", token);
@@ -114,7 +114,7 @@ function ScreenUser(props) {
         const response = await fetch('/users/finduser', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
-          body: `token=${token/*props.tokenToDisplay*/}`
+          body: `token=${props.tokenToDisplay}`
         });
         const userResponse = await response.json()
         console.log("useeffect userResponse ", userResponse );
@@ -138,11 +138,11 @@ function ScreenUser(props) {
       }
       articleData()
     } 
-  }, [props.tokenToDisplay, token])
+  }, [props.tokenToDisplay, /*token*/])
 
-  // if (!props.tokenToDisplay){
-  //   return <Redirect to="/"  />
-  // }
+  if (!props.tokenToDisplay){
+    return <Redirect to="/"  />
+  }
 
   // LISTE DES ARTICLES
   var cardArticle = [];
@@ -191,7 +191,7 @@ function ScreenUser(props) {
     const response = await fetch('/users/supprP2', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `token=${/*props.tokenToDisplay*/token}&p2=${P2}`
+      body: `token=${props.tokenToDisplay/*token*/}&p2=${P2}`
     });
     const supprP2Response = await response.json()
     console.log('supprP2Response ', supprP2Response)

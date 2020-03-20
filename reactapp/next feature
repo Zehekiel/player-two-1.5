@@ -10,13 +10,12 @@ screenidentity:
     ajouter une description
     login via facebook/google
 
-
-
 log out
 
 cliquer sur une news et ouvrir dans un nouvelle onglet
 
 screenuser: 
+    voir quand quelqu'un nous a ajouté dans ses Players TWo
     filter par jeux pour trouver les P2 qui joue à ceux jeux
     ranger par nombre de jeux en commun
     afficher qu'un certain nombre de P2
