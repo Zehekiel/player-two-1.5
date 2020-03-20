@@ -1,0 +1,36 @@
+team
+team admin
+wish (global ou par jeux)
+chat
+trouver quelqu'un près de chez soi
+
+screenidentity:
+    require une vrai adresse email
+    faire double mail pour vérifier
+    ajouter une description
+    login via facebook/google
+
+
+
+log out
+
+cliquer sur une news et ouvrir dans un nouvelle onglet
+
+screenuser: 
+    filter par jeux pour trouver les P2 qui joue à ceux jeux
+    ranger par nombre de jeux en commun
+    afficher qu'un certain nombre de P2
+    pouvoir afficher les autres en modal
+    ajouter une description
+    blacklister les joueurs
+    actu user dynamique selon plateforme
+
+pouvoir envoyer des mails
+
+imposer nombre de caractère pour le mot de passe
+
+matchpage: 
+    ?ajouter tout
+
+Screen Home
+    customise le boutton FIND PLAYER TWO
