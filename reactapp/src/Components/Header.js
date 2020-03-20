@@ -434,8 +434,6 @@ function CustomIconSwitch (props) {
   var clickCloseModal = (checkedhandle, modalShowhandle) =>{
     setChecked(checkedhandle)
     setModalShow(modalShowhandle)
-    console.log("modalShow",modalShow);
-    console.log("checked",checked);
   };
 
   if(props.token){
@@ -446,7 +444,7 @@ function CustomIconSwitch (props) {
       body: `token=${props.token}`
     })
     const body = await data.json()
-    console.log("header finduser respone ", body);
+    // console.log("header finduser respone ", body);
     setAvatar(body.userFind.avatar)
     }
     userData()
@@ -456,8 +454,6 @@ function CustomIconSwitch (props) {
     if(token === null){
       setChecked(true)
       setModalShow(true)
-      console.log("modalShow",modalShow);
-      console.log("checked",checked);
       props.logout()
       return  <Redirect to='/'/>
     } else {

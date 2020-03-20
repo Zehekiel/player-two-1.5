@@ -143,7 +143,7 @@ if(P2 !== "" ){
 }  
 
 function mapStateToProps(state){
-  return {userId: state.user, /*p2:state.p2*/}
+  return {tokenToDisplay: state.token}
 }
 
 function mapDispatchToProps(dispatch){
