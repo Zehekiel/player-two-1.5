@@ -126,10 +126,9 @@ const ScreenIdentity = (props) => {
 
       <Row className="titleTeam">
         <img style={{height:"40px", marginRight:"30px" }} src={require('../images/java-script.svg')}  alt="team"/>
-        <h1  className="heading" style={{marginBottom: 5}}>Inscription</h1>
+        <h1 className="heading" style={{marginBottom: 5}}>Inscription</h1>
       </Row>
-      {/* gif Gandalf, voir pour l'afficher quelque seconde avant de faire apparaître le formulaire */}
-      {/* <img src='https://media.giphy.com/media/YkfhemFXalh7O/giphy.gif'/> */}
+      {/* gif Gandalf, voir pour l'afficher quelque seconde avant de faire apparaître le formulaire */} */}
 
       <Container>
         <Row xs="1">

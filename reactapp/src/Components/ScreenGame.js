@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, FormGroup, Label, Input, Form, Card, Button, Table,} from 'reactstrap';
+import { Col, Container, Row, FormGroup, Label, Input, Form, Card, Button, Table,  InputGroup, InputGroupAddon,} from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Modal,} from 'react-bootstrap';
@@ -20,6 +20,10 @@ function ScreenGame(props) {
   const [gameListSelected, setGameListSelected] = useState([])
   const [searchGameList, setSearchGameList] = useState([])
   const [modalShow, setModalShow] = useState(false)
+  const [displayService, setDisplayService] = useState("none")
+  const [displaySearchGame, setDisplaySearchGame] = useState("none")
+
+
 
 
 
@@ -40,7 +44,8 @@ function ScreenGame(props) {
 
   //afficher les services par défaut attaché à la plateforme
     const handlePlateformeSelect = async (clickPlateform) => {
-      setPlateformSelect(clickPlateform)
+      setPlateformSelect(clickPlateform);
+      setDisplaySearchGame("block");
       const serviceResponse =await fetch('/service', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -56,6 +61,7 @@ function ScreenGame(props) {
       });
       const userResponse = await usersresponse.json()
       // console.log("userResponse ",userResponse.userFind);
+      
 
       if(userResponse.userFind.service[0]){
         setTag(userResponse.userFind.service[0].tag)
@@ -63,6 +69,7 @@ function ScreenGame(props) {
         //récupéré img et service from back selon plateformeSelect
         setserviceList(response.service)
         setplateformIcon(response.img)
+        setDisplaySearchGame("block")
     }; 
 
     //Changement dans Input JEUX
@@ -104,12 +111,13 @@ function ScreenGame(props) {
       setAddGame(gameselect)
       setGameListSelected(addGame)
       setModalShow(false)
+      setDisplayService("block")
       // mapDispatchToProps(gameListSelected)
     }
     
     var iconGameSelected
     var gifchosen
-    if (addGame !== '') {
+    if (addGame  && tag!== '') {
       iconGameSelected = <img src={`${addGame.cover.url}`} style={{padding:'5px', height: '50px', width:'50px', borderRadius: "10px", marginRight: "10px"}} alt=""/>
       gifchosen = <img src="https://media.giphy.com/media/X0F1Tw5ZcIYkU/giphy.gif" style={{position: "relative", left:"28%"}} alt=""/>
     }
@@ -208,15 +216,14 @@ const MyVerticallyCenteredModal= (props) => {
 
       <Container>
         <Row xs="1" style={{justifyContent:"center"}}>
-
           <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)" ,backgroundColor: '#010212', borderRadius: "0px 50px", flexDirection:"row", padding:"50px 70px", margin: 50}}>
+            <Col>
 
-            <Col style={{borderRight: "1px solid #A58CA3", paddingRight: 30}}>
               {/* PLATEFORME */}
               <Form > 
-                <FormGroup style={{alignItems: "center"}} row>
-                  <Label style={{ margin:"0px", justifyContent: "start"}} >Plateforme*</Label>
-                  <Col>
+                <FormGroup style={{alignItems: "center"}} className="boldFont" row>
+                  <Label md={2} style={{ margin:"0px", justifyContent: "start"}} >Plateforme*</Label>
+                  <Col md={6}>
                   <Input required style={{borderRadius:25}}  onChange={(e) => handlePlateformeSelect(e.target.value) } type="select" >
                     <option> ... </option> 
                     { plateformList.map((plateform, i)=>(
@@ -230,28 +237,33 @@ const MyVerticallyCenteredModal= (props) => {
                 </FormGroup>
 
                 {/* JEUX */}
-                <FormGroup style={{paddingTop: paddingData, alignItems: "center"}} row>
-                  <Label style={{ margin:"0px" }} className="font">Jeux*</Label>
-                  <img onClick={(e) => handleClickSearchGame(e.target.value)}  style={{height:25, paddingLeft:25}} src={require("../images/search.svg")} alt=""/>
-                  <Col>
-                    <Input required style={{borderRadius:25}} onChange={(e)=> handleSearchGame(e.target.value)} type="search">
-                    </Input>
+                <div  style={{display:displaySearchGame}}>
+                  <FormGroup className="boldFont" style={{paddingTop: paddingData, alignItems: "center", paddingBottom: 15, }} row>
+                  <Label md={2} style={{ margin:"0px" }} className="font">Jeux* </Label>
+                  <Col md={6}>
+                  <InputGroup>
+                    <Input required style={{borderRadius:25}} onChange={(e)=> handleSearchGame(e.target.value)} type="search" placeholder="GTA V, Fortnite, ..."> </Input>
+                    <InputGroupAddon addonType="append">
+                      <Button color="secondary" outline onClick={(e) => handleClickSearchGame(e.target.value)} style={{borderRadius:25}}>
+                        Résultats
+                        <img   style={{height:15, paddingLeft:15}} src={require("../images/search.svg")} alt=""/>
+                      </Button>
+                    </InputGroupAddon>
+                  </InputGroup>
+                    
                     {iconGameSelected}
                   </Col>
                   
                 </FormGroup>
+                </div>
                 
-              </Form>
-              
-            </Col>
-            
-            {/* SERVICE */}
-            <Col style={{marginLeft:"30px"}}>
-              <Form>
-              <FormGroup style={{alignItems: "center"}} row>
-                  <Label style={{ margin:"0px" }} className="font">Service*</Label>
-                  <Col>
-                    <Input style={{borderRadius:25, }} onChange={(e) => setServiceSelect(e.target.value)} type="select" placeholder={serviceSelect}>
+                
+              {/* SERVICE */}
+              <div  style={{display:displayService, borderTop: "1px solid #A58CA3", paddingTop: 25}}>
+              <FormGroup className="boldFont" style={{alignItems: "center"}} row>
+                  <Label  md={2} style={{ margin:"0px" }} className="font">Service*</Label>
+                  <Col md={6}>
+                    <Input style={{borderRadius:25}} onChange={(e) => setServiceSelect(e.target.value)} type="select" placeholder={serviceSelect}>
                     <option >{serviceSelect}</option>
                     { serviceList.map((service, i)=>(
                       <option key={i}>{service}</option>
@@ -259,12 +271,16 @@ const MyVerticallyCenteredModal= (props) => {
                     </Input>
                   </Col>
                 </FormGroup>
-                <FormGroup style={{paddingTop:"45px", alignItems: "center"}} row>
-                  <Label style={{ margin:"0px" }} className="font" >Service ID*</Label>
-                  <Col>
+
+                {/* TAG */}
+                <FormGroup className="boldFont" style={{paddingTop:"45px", alignItems: "center"}} row>
+                  <Label md={2} style={{ margin:"0px" }} className="font" >Service ID*</Label>
+                  <Col md={6}>
                     <Input style={{borderRadius:25}} onChange={(e) => setTag(e.target.value)} type="text"  placeholder={tag}/>
                   </Col>
                 </FormGroup>
+              </div>
+              
               </Form>
             </Col>
 
