@@ -36,9 +36,7 @@ function ScreenGame(props) {
       fetchdata()
     }, [props.tokenToDisplay, props])
 
-    if (!props.tokenToDisplay){
-      return <Redirect to="/"  />
-    }
+
 
   //afficher les services par défaut attaché à la plateforme
     const handlePlateformeSelect = async (clickPlateform) => {
@@ -150,6 +148,10 @@ function ScreenGame(props) {
       <Redirect to='/screenmatchpage'/>)
     };
 
+    // if (!props.tokenToDisplay){
+    //   return <Redirect to="/"  />
+    // }
+
 
 // MODAL 
 const MyVerticallyCenteredModal= (props) => {
@@ -209,7 +211,7 @@ const MyVerticallyCenteredModal= (props) => {
 
           <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)" ,backgroundColor: '#010212', borderRadius: "0px 50px", flexDirection:"row", padding:"50px 70px", margin: 50}}>
 
-            <Col>
+            <Col style={{borderRight: "1px solid #A58CA3", paddingRight: 30}}>
               {/* PLATEFORME */}
               <Form > 
                 <FormGroup style={{alignItems: "center"}} row>
@@ -249,7 +251,7 @@ const MyVerticallyCenteredModal= (props) => {
               <FormGroup style={{alignItems: "center"}} row>
                   <Label style={{ margin:"0px" }} className="font">Service*</Label>
                   <Col>
-                    <Input style={{borderRadius:25}} onChange={(e) => setServiceSelect(e.target.value)} type="select" placeholder={serviceSelect}>
+                    <Input style={{borderRadius:25, }} onChange={(e) => setServiceSelect(e.target.value)} type="select" placeholder={serviceSelect}>
                     <option >{serviceSelect}</option>
                     { serviceList.map((service, i)=>(
                       <option key={i}>{service}</option>

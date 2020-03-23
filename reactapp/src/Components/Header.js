@@ -78,7 +78,7 @@ import {connect} from 'react-redux';
             {tabErrorsSignIn}
           </Modal.Body>
 
-          <Modal.Footer style={{color: 'white', backgroundColor: '#010212'}}>
+          <Modal.Footer style={{color: 'white', backgroundColor: '#010212', borderRadius: "0px 0px 90px 60px"}}>
             <Button onClick={() => handleSubmitSignIn()} style={{ marginBottom: '1rem', color: 'white', backgroundColor: '#18198A' }} size="sm">Connexion</Button>
           </Modal.Footer>
         </Modal>
@@ -546,7 +546,7 @@ function CustomIconSwitch (props) {
           </label>
           {/*fin  TOGGLE DE CONNEXION */}
 
-          {/* Footer */}
+          {/* Menu */}
             <UncontrolledDropdown direction="left" style={{paddingLeft: 10}}>
               <DropdownToggle outline>
                 Menu
