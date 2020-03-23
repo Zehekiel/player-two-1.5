@@ -546,9 +546,13 @@ function ScreenUser(props) {
         {/*__________ MES PLAYER TWO __________*/}
         <Container className="card-background" style={{boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor:"#010212", marginTop:"-10px", paddingBottom: "20px", marginBottom: "20px"}}>
           <Card style={{ borderRadius:"0 50", backgroundColor:"transparent", marginTop: "10px"}}>
-            <CardTitle style={{ alignSelf: 'center', }} >Mes Player Two <Link to="/screenmatchpage"> <img style={{height:"20px", width:"20px", margin: "0px 10px"}} src={require('../images/add 1.svg')} alt="add"/> </Link></CardTitle>
+            <CardTitle style={{ alignSelf: 'center', }} >Mes Player Two 
+              <Link to="/screenmatchpage"> 
+                <img style={{height:"20px", width:"20px", margin: "0px 10px"}} src={require('../images/add 1.svg')} alt="add"/> 
+              </Link>
+            </CardTitle>
           
-            {/* AFFICHER les P2 */}
+            {/* Map les jeux des P2 */}
             {playerTwo.map((map, i)=> {
               var P2GameList = []
               for (var m = playerTwo[i].idGame.length-1; m>=0; m--){
@@ -561,13 +565,15 @@ function ScreenUser(props) {
                 )
               }
 
-              //afficher les GAME des P2
+              //afficher les P2 et leurs jeux
               return(
                 <CardBody key={i*100} className="card-background" style={{ borderRadius:"0 50", backgroundColor:"transparente", marginBottom:10}}>
                   <Row style={{paddingInline: "20px", display:"flex", alignItems: "center", marginBottom: "10px", alignContent:"space-between"}}>
                     <img height="3%" width="10%" src={map.avatar} alt="avateur P2" />
                     <Col xs="auto">
-                      <Link to={`/screenotheruser/${map._id}`}><CardTitle >{map.pseudo}</CardTitle></Link> 
+                      <Link to={`/screenotheruser/${map._id}`}>
+                        <CardTitle> {map.pseudo} </CardTitle>
+                      </Link> 
                     </Col>
                     <Col style={{display:"flex", flexDirection:"row-reverse", alignItems:"center"}}>
                       <img onClick={()=>clickSupprP2(map._id)} style={{height: "20px" ,backgroundColor:"transparente"}} src={require("../images/waste.svg")} alt="" />

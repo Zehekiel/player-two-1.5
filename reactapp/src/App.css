@@ -196,6 +196,11 @@ p.card-subtitle{
   border-radius: 0px 50px;
   padding: 15px
 }
+
+div.card-body{
+  padding: 10px
+}
+
 .titleTeam{
   padding-top: 10px;
   align-items: center;
@@ -247,31 +252,20 @@ element.style{
     border: 0px; 
     transition: background-color 0.25s ease 0s, transform 0.25s ease 0s, box-shadow 0.15s ease 0s;
   }
+/*fin  TOGGLE */
 
-
-
-/* TOGGLE */
 
 .modal-content {
   position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
     pointer-events: auto;
     background-color: transparent !important;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.2);
-    border-radius: 100px 50px !important;
+    border-radius:0px 0px 90px 50px !important;
     outline: 0;
     box-shadow: 0px 4px 4px rgba(231, 10, 10, 0.7);
-}
-
-.modal-footer{
-  border-bottom-left-radius: 50px !important;
-}
-
-.modal-header{
-  border-top-right-radius: 50px !important;
 }
 
 .false{
@@ -393,3 +387,72 @@ body {
   }
 }
 /* FIN PLAY BUTTON */
+
+/* MODAL STYLE */
+
+.modal-header{
+  background-Color: #010212;
+  box-sizing:0px 4px 4px rgba(144, 14, 205, 0.8)
+}
+
+.modal-title{
+  color: white ;
+  background-color: #010212;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 0px 4px 4px rgba(144, 14, 205, 0.8);
+
+}
+
+button.btn.btn-primary{
+  color: white;
+  background-Color: #010212;
+  justify-Content: right; 
+  border: 0;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.modal-body{
+  padding: 10px !important;
+  color: white;
+  background-color: #010212;
+  border-Radius: 0px 0px 90px 40px;
+  box-Shadow:0px 4px 4px rgba(144, 14, 205, 0.8);
+}
+
+.modalbody-footer{
+  justify-content: center;
+  color: white;
+  background-color: #010212;
+  border-Radius: 0px;
+  box-Shadow:0px 4px 4px rgba(145, 14, 205, 0);
+}
+
+.modal-footer{
+  justify-content: center!important;
+  color: white;
+  background-Color: #010212; 
+  border-Radius: 0px 0px 90px 60px !important;
+  box-Shadow:0px 4px 4px rgba(144, 14, 205, 0.8);
+
+}
+
+button.btn.btn-primary.btn-sm{
+  margin-Bottom: 1rem; 
+  color: white; 
+  background-Color: #18198A !important; 
+}
+
+.divmap{
+  margin: 10px;
+  align-Items:center;
+  justify-content: space-between;
+  border-Radius: 0px 0px 90px 40px;
+  padding: 7px;
+  color: white;
+  background-Color: #010212;
+  border-Bottom: 1px solid #A58CA3;
+}
+
+

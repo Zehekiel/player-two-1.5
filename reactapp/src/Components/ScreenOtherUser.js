@@ -15,6 +15,7 @@ function ScreenOtherUser(props) {
 
   useEffect(() => {
     setUserId(props.tokenToDisplay)
+    
     if(props.match.params.p2id){
       setP2Id(props.match.params.p2id)
     }

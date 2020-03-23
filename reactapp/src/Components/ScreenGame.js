@@ -22,7 +22,7 @@ function ScreenGame(props) {
   const [modalShow, setModalShow] = useState(false)
   const [displayService, setDisplayService] = useState("none")
   const [displaySearchGame, setDisplaySearchGame] = useState("none")
-
+  const [outlineSearch, setOutlineSearch] = useState("sucess")
 
 
 
@@ -75,6 +75,9 @@ function ScreenGame(props) {
     //Changement dans Input JEUX
     const handleSearchGame = async (game) => {
       setSearchGame(game)
+      if (searchGame.length>=2){
+        setOutlineSearch("danger")
+      }
     }; 
     
     // CLICK sur le bouton SEARCH
@@ -92,17 +95,22 @@ function ScreenGame(props) {
     for(var i = 0; i<searchGameresponse.length; i++){
       //sinon lui en rajouter un par défaut
       if (searchGameresponse[i].cover === undefined){
-        var object = {...searchGameresponse[i], cover:{'url':''}}
+        var object = {...searchGameresponse[i], cover:{'url':require('../images/ghost.svg')}}
         searchGameresponse[i] = object
       } 
     }
-    
-    if (searchGameresponse) {
+
+    if (searchGameresponse.length > 0) {
       setSearchGameList(searchGameresponse)
       setModalShow(true)
       searchGameresponse = false
+    } 
+
+    if(searchGameresponse.length == 0) {
+      setSearchGameList([{cover:{url:require("../images/JohnTravolta.gif")}, name: `0 jeu trouvé, tu es sûr(e) du nom?` }])
+      setModalShow(true)
     }
-  }
+  } 
 
     // ___________ CLIC ADD sur un jeux de la liste proposé par l'API
     const handleGameSelect = (gameselect) => {
@@ -161,39 +169,31 @@ function ScreenGame(props) {
     // }
 
 
-// MODAL 
-const MyVerticallyCenteredModal= (props) => {
+// ___________ SearchGameModal MODAL ___________
+const SearchGameModal= (props) => {
 
   return (
     <Modal
       {...props}
-      aria-labelledby="contained-modal-title-vcenter"
       centered
       style={{borderRadius: "0px 50px", boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)"}}
-              >
-      <Modal.Header style={{backgroundColor: '#010212'}}>
-        <Modal.Title id="contained-modal-title-vcenter" style={{color: 'white', backgroundColor: '#010212'}}>
+    >
+      <Modal.Header >
+        <Modal.Title>
           Recherche de Jeux
         </Modal.Title>
-        <Button style={{color: 'white', backgroundColor: '#010212', justifyContent: 'right', border: 0,}} onClick={props.onHide}><img src={require('../images/cross_modal.svg')} alt=""/></Button>
+        <Button color="primary" onClick={props.onHide}> <img src={require('../images/cross_modal.svg')} alt=""/></Button>
       </Modal.Header>
 
-        <Modal.Body style={{color: 'white', backgroundColor: '#010212', alignContent:"center", borderBottomLeftRadius:50}}>
-
-    <Table style={{color:'white'}}>
-      { searchGameList.map((game, i)=>( 
-        <tbody key={i}>
-          <tr >
-          <td><img src={`${game.cover.url}`} alt="game cover"></img></td>
-          <td className="align-middle">{game.name}</td>
-          <td className="align-middle"> 
-            <Button onClick={()=>handleGameSelect(game)} outline style={{fontSize:16, fontFamily: 'Comfortaa'}}>Add</Button>
-          </td>
-        </tr>
-        </tbody>        
-        ))}
-    </Table>
-    </Modal.Body>
+      <Modal.Body>
+          { searchGameList.map((game, i)=>( 
+            <div key={i} className='divmap' target="_blank" style={{display: "flex", textDecoration: "none", }}> 
+              <img src={`${game.cover.url}`} style={{borderRadius:"0px 0px 0px 30px", height:90, width:90,}} alt="game cover"></img>
+              <p>{game.name}</p>
+              <Button onClick={()=>handleGameSelect(game)} outline style={{fontSize:16, fontFamily: 'Comfortaa', paddingLeft:-35}}>Add</Button>
+            </div>
+            ))}
+      </Modal.Body>
     </Modal>
   );
 }
@@ -209,7 +209,7 @@ const MyVerticallyCenteredModal= (props) => {
         <h1  className="heading" style={{marginBottom: 5}}>Ajoute un jeux</h1>
       </Row>
 
-      <MyVerticallyCenteredModal
+      <SearchGameModal
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
@@ -242,11 +242,11 @@ const MyVerticallyCenteredModal= (props) => {
                   <Label md={2} style={{ margin:"0px" }} className="font">Jeux* </Label>
                   <Col md={6}>
                   <InputGroup>
-                    <Input required style={{borderRadius:25}} onChange={(e)=> handleSearchGame(e.target.value)} type="search" placeholder="GTA V, Fortnite, ..."> </Input>
-                    <InputGroupAddon addonType="append">
-                      <Button color="secondary" outline onClick={(e) => handleClickSearchGame(e.target.value)} style={{borderRadius:25}}>
+                    <Input required style={{borderRadius:25}} onChange={(e)=> handleSearchGame(e.target.value)} type="search" placeholder="ex: GTA 5, Fortnite, ..."/>
+                    <InputGroupAddon addonType="append" style={{paddingLeft:10}}>
+                      <Button color={outlineSearch} outline onClick={(e) => handleClickSearchGame(e.target.value)} style={{borderRadius:25}}>
                         Résultats
-                        <img   style={{height:15, paddingLeft:15}} src={require("../images/search.svg")} alt=""/>
+                        <img   style={{height:15, paddingLeft:10}} src={require("../images/search.svg")} alt=""/>
                       </Button>
                     </InputGroupAddon>
                   </InputGroup>

@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { Col, Row, Form, FormGroup, Label, Input, Container, Card, Button, Collapse } from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {Modal,} from 'react-bootstrap'  ; 
 import {connect} from 'react-redux';
 
 
 
 const ScreenIdentity = (props) => {
-
+// inscription
   const [signUpPseudo, setSignUpPseudo] = useState('')
   const [signUpPassword, setSignUpPassword] = useState('')
   const [signUpEmail, setSignUpEmail] = useState('')
@@ -15,13 +15,17 @@ const ScreenIdentity = (props) => {
   const [country, setCountry] = useState('')
   const [gender, setGender] = useState('')
   const [language, setLanguage] = useState('')
+  const [avatar, setAvatar] = useState('')
   const [userExists, setUserExists] = useState(false)
   const [listErrorsSignup, setErrorsSignup] = useState([])
   const [token, setToken] = useState('')
   const [isOpen, setIsOpen] = useState(false);
   const [classAngle, setclassAngle]= useState(false)
-  const [avatar, setAvatar] = useState('')
+
+// modals
   const [modalAvatar, setModalAvatar] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false)
+
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -64,8 +68,8 @@ const ScreenIdentity = (props) => {
   }
 
   // Tableau de message d'erreur
-  var tabErrorsSignup = listErrorsSignup.map((error,i) => {
-    return(<p className="error">{error}</p>)
+  var tabErrorsSignup = listErrorsSignup.map((error,w) => {
+    return(<p key={{w}} className="error">{error}</p>)
   })
 
   // CLICK sur un AVATAR de liste
@@ -114,6 +118,80 @@ const ScreenIdentity = (props) => {
 }
 //fin modal avatar
 
+//-----------MODAL SIGN IN-----------//
+const SignInModal= (props) => {
+
+  const [signInEmailPseudo, setSignInEmailPseudo] = useState('')
+  const [signInPassword, setSignInPassword] = useState('')
+  const [userExists, setUserExists] = useState(false)
+  const [listErrorsSignIn, setErrorsSignIn] = useState([])
+  
+
+
+  var handleSubmitSignIn = async () => {
+
+    const data = await fetch('/users/connection', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `pseudoFromFront=${signInEmailPseudo}&mailFromFront=${signInEmailPseudo}&passwordFromFront=${signInPassword}`
+    })
+
+    const body = await data.json()
+
+    if(body.result === true){
+      setUserExists(true)
+      props.addToken(body.token)
+      props.onHide()
+      setErrorsSignIn([])
+    } else {
+      setErrorsSignIn(body.error)
+    }
+  }
+
+  if(userExists){
+    return <Redirect to='/screenuser'/>
+  }
+
+  var tabErrorsSignIn = listErrorsSignIn.map((error,i) => {
+    return(<p className="error">{error}</p>)
+  })
+
+  function clickClose(){
+    setErrorsSignIn([])
+    props.onHide()
+  }
+
+
+  // --- return of modal --- 
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title >
+          Connexion
+        </Modal.Title>
+        <Button color='primary' onClick={()=> clickClose()}>
+          <img src={require('../images/cross_modal.svg')} alt=""/>
+        </Button>
+      </Modal.Header>
+
+      <Modal.Body className="modalbody-footer">
+        <Input onChange={(e) => setSignInEmailPseudo(e.target.value)} type="text" required placeholder="Email ou Pseudo" style={{width: 600}}/>
+        <Input onChange={(e) => setSignInPassword(e.target.value)} type="password" required placeholder="Mot de passe" style={{width: 600}}/>
+        {tabErrorsSignIn}
+      </Modal.Body>
+
+      <Modal.Footer style={{}}>
+        <Button color='primary' onClick={() => handleSubmitSignIn()} size="sm">Connexion</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+//---------FIN MODAL SIGN IN-----------//
+
 
   // _____________________ RETURN ________________________
   return (
@@ -124,11 +202,17 @@ const ScreenIdentity = (props) => {
         onHide={() => setModalAvatar(false)}
       />
 
+      <SignInModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        addToken={props.addToken}
+      />
+
       <Row className="titleTeam">
         <img style={{height:"40px", marginRight:"30px" }} src={require('../images/java-script.svg')}  alt="team"/>
         <h1 className="heading" style={{marginBottom: 5}}>Inscription</h1>
       </Row>
-      {/* gif Gandalf, voir pour l'afficher quelque seconde avant de faire apparaître le formulaire */} */}
+      {/* gif Gandalf, voir pour l'afficher quelque seconde avant de faire apparaître le formulaire */}
 
       <Container>
         <Row xs="1">
@@ -143,16 +227,16 @@ const ScreenIdentity = (props) => {
                 </FormGroup>
 
                 <FormGroup row className="boldFont">
-                  <Label md={2}>Mot de passe*</Label>
+                  <Label md={2}>Email*</Label>
                   <Col md={4}>
-                    <Input onChange={(e) => setSignUpPassword(e.target.value)} style={{borderRadius:25}} type="password"/>
+                    <Input onChange={(e) => setSignUpEmail(e.target.value)} style={{borderRadius:25}} type="email"/>
                   </Col>
                 </FormGroup>
 
                 <FormGroup row className="boldFont">
-                  <Label md={2}>Email*</Label>
+                  <Label md={2}>Mot de passe*</Label>
                   <Col md={4}>
-                    <Input onChange={(e) => setSignUpEmail(e.target.value)} style={{borderRadius:25}} type="email"/>
+                    <Input onChange={(e) => setSignUpPassword(e.target.value)} style={{borderRadius:25}} type="password"/>
                   </Col>
                 </FormGroup>
 
@@ -236,12 +320,22 @@ const ScreenIdentity = (props) => {
           </Col>
         </Row>
 
-        <FormGroup className="nextButton boldFont" style={{margin:0,  paddingTop:25, justifyContent:"center"}}>
-          <Button onClick={() => handleSubmitSignup()} color="transparent" style={{padding:0}}>
-            <img style={{height:"100px", width:"100px"}} src={require('../images/button.svg')} alt="button start"/>
-            <div className="textButton">Start</div>
-          </Button>
-        </FormGroup>
+        <Row style={{alignSelf: "center", justifyContent: "center",  }}>
+          <FormGroup className="nextButton boldFont" style={{margin:0,  paddingTop:25, marginRight:20, justifyContent:"center"}}>
+            <Button onClick={() => setModalShow(true)} color="transparent" style={{padding:0}}>
+              <img style={{height:"100px", width:"100px",transform: 'rotate(180deg)'}} src={require('../images/button.svg')} alt="button start"/>
+              <div className="textButton" style={{paddingLeft:20}}> inscrit?</div>
+            </Button>
+          </FormGroup>
+
+          <FormGroup className="nextButton boldFont" style={{margin:0,  paddingTop:25, justifyContent:"center"}}>
+            <Button onClick={() => handleSubmitSignup()} color="transparent" style={{padding:0}}>
+              <img style={{height:"100px", width:"100px"}} src={require('../images/button.svg')} alt="button start"/>
+              <div className="textButton" style={{paddingRight:20}}>Start</div>
+            </Button>
+          </FormGroup>
+        </Row>
+        
       </Container>
     </div>
   );

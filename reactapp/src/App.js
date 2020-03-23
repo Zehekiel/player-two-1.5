@@ -18,10 +18,9 @@ import Header from "./Components/Header"
 //redux
 import token from './reducer/token'
 import game from './reducer/game'
-import user from './reducer/user'
 import {Provider} from 'react-redux'
 import {createStore, combineReducers} from 'redux'
-const store = createStore(combineReducers({game, token, user}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(combineReducers({game, token}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 function App() {

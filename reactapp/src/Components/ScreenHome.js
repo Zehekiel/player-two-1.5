@@ -60,12 +60,12 @@ function ArticlesModal(props) {
 
   var cardArticle = articlesList.map((article,i) => {
     return (
-      <div key={i} style={{padding: 7, color: 'white', backgroundColor: '#010212', borderBottom: "1px solid #A58CA3", /*borderTop: "1px solid #A58CA3",*/ margin: 10, alignItems:"center", borderRadius: "0px 0px 90px 40px" }}>
+      <div key={i} className="divmap">
           <a  href={article.link} target="_blank" rel="noopener noreferrer" style={{display: "flex", textDecoration: "none", }}>
             <img width="30%" style={{borderRadius:"0px 0px 0px 30px"}}  src={article.image} alt="" />
             <div style={{alignSelf: "center"}}>
               <p style={{margin: 15, color: 'white'}}>{article.title}</p>
-              <p style={{margin: 15, marginBottom: 0, color: 'white'}}>{article.subTitle}</p>
+              {/* <p style={{margin: 15, marginBottom: 0, color: 'white'}}>{article.subTitle}</p> */}
             </div>
           </a>
       </div>
@@ -76,18 +76,18 @@ function ArticlesModal(props) {
     <Modal
       {...props}
       size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
       centered
-      style={{borderRadius: "0px 50px", boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)",}}
     >
-      <Modal.Header style={{backgroundColor: '#010212',boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)"}}>
-        <Modal.Title id="contained-modal-title-vcenter" style={{color: 'white', backgroundColor: '#010212', justifyContent: 'center' }}>
+      <Modal.Header >
+        <Modal.Title  >
           Actualité du jeu vidéo
         </Modal.Title>
-        <Button style={{color: 'white', backgroundColor: '#010212', justifyContent: 'right', border: 0,}} onClick={props.onHide}> <img src={require('../images/cross_modal.svg')} alt="modal cross"/></Button>
+        <Button onClick={props.onHide}> 
+          <img src={require('../images/cross_modal.svg')} alt="modal cross"/>
+        </Button>
       </Modal.Header>
 
-      <Modal.Body style={{color: 'white', backgroundColor: '#010212', borderRadius: "0px 0px 90px 40px",boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)"}}>
+      <Modal.Body>
         {cardArticle}
       </Modal.Body>
 
@@ -115,7 +115,7 @@ function PopularGamesModal(props) {
 
   var cardArticle = popularGamesList.map((article,i) => {
     return (
-      <div key={i} style={{padding: 7, color: 'white', backgroundColor: '#010212', borderBottom: "1px solid #A58CA3", /*borderTop: "1px solid #A58CA3",*/ margin: 10, borderRadius: "0px 0px 90px 40px"}}>
+      <div key={i} className='divmap'>
           <div  target="_blank" href={article.link} style={{display: "flex", textDecoration: "none"}}>
             <img width="15%" height="15%" src={article.image} alt="" style={{borderRadius:"0px 0px 0px 30px"}}/>
             <div style={{alignSelf: "center"}}>
@@ -132,19 +132,19 @@ function PopularGamesModal(props) {
     <Modal
       {...props}
       size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
       centered
-      style={{borderRadius: "0px 50px", boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)",}}
     >
 
-      <Modal.Header style={{backgroundColor: '#010212'}}>
-        <Modal.Title id="contained-modal-title-vcenter" style={{color: 'white', backgroundColor: '#010212', justifyContent: 'center' }}>
+      <Modal.Header >
+        <Modal.Title >
           Jeux populaires
         </Modal.Title>
-        <Button style={{color: 'white', backgroundColor: '#010212', justifyContent: 'right', border: 0,}} onClick={props.onHide}> <img src={require('../images/cross_modal.svg')} alt="modal cross"/></Button>
+        <Button onClick={props.onHide}> 
+          <img src={require('../images/cross_modal.svg')} alt="modal cross"/>
+        </Button>
       </Modal.Header>
 
-      <Modal.Body style={{color: 'white', backgroundColor: '#010212', borderRadius: "0px 0px 90px 40px",boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)"}}>
+      <Modal.Body>
         {cardArticle}
       </Modal.Body>
 

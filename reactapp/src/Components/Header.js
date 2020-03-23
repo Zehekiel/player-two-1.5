@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 
   // MODALS
     //-----------MODAL SIGN IN-----------//
-    const MyVerticallyCenteredModal= (props) => {
+    const SignInModal= (props) => {
 
       const [signInEmailPseudo, setSignInEmailPseudo] = useState('')
       const [signInPassword, setSignInPassword] = useState('')
@@ -59,27 +59,25 @@ import {connect} from 'react-redux';
         <Modal
           {...props}
           size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
           centered
-          style={{borderRadius: "0px 50px", boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)",}}
         >
-          <Modal.Header style={{backgroundColor: '#010212'}}>
-            <Modal.Title id="contained-modal-title-vcenter" style={{color: 'white', backgroundColor: '#010212'}}>
+          <Modal.Header>
+            <Modal.Title >
               Connexion
             </Modal.Title>
-            <Button style={{color: 'white', backgroundColor: '#010212', justifyContent: 'right', border: 0,}}onClick={()=> clickClose()}>
+            <Button onClick={()=> clickClose()}>
               <img src={require('../images/cross_modal.svg')} alt=""/>
             </Button>
           </Modal.Header>
 
-          <Modal.Body style={{color: 'white', backgroundColor: '#010212', alignContent:"center"}}>
-            <Input onChange={(e) => setSignInEmailPseudo(e.target.value)} type="text" required placeholder="Email ou PSeudo" style={{width: 600}}/>
-            <Input onChange={(e) => setSignInPassword(e.target.value)} type="password" required placeholder="Password" style={{width: 600}}/>
+          <Modal.Body className="modalbody-footer">
+            <Input onChange={(e) => setSignInEmailPseudo(e.target.value)} type="text" required placeholder="Email ou Pseudo" style={{width: 600}}/>
+            <Input onChange={(e) => setSignInPassword(e.target.value)} type="password" required placeholder="Mot de passe" style={{width: 600}}/>
             {tabErrorsSignIn}
           </Modal.Body>
 
-          <Modal.Footer style={{color: 'white', backgroundColor: '#010212', borderRadius: "0px 0px 90px 60px"}}>
-            <Button onClick={() => handleSubmitSignIn()} style={{ marginBottom: '1rem', color: 'white', backgroundColor: '#18198A' }} size="sm">Connexion</Button>
+          <Modal.Footer style={{}}>
+            <Button onClick={() => handleSubmitSignIn()} size="sm">Connexion</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -428,6 +426,7 @@ function CustomIconSwitch (props) {
       }
     }    
     findToken()
+
   }, [props.token]);
 
   // CLICK X de la modal
@@ -484,7 +483,7 @@ function CustomIconSwitch (props) {
         onHide={() => setModalShowMention(false)}
       />
 
-      <MyVerticallyCenteredModal
+      <SignInModal
         show={modalShow}
         onHide={() => clickCloseModal(false, false)}
         addToken={props.addToken}
