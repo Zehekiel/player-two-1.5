@@ -17,16 +17,16 @@ function ScreenMatchPage(props) {
 
   useEffect( () => {
 
-    // if (props.tokenToDisplay){
+    if (props.tokenToDisplay){
       async function fetchdata (){
       // plateform from back
       const response = await fetch("/findmatch", {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `token=${/*props.tokenToDisplay*/"ON12xS19FYsNc025aTnIGYpp4ZNtNirB"}`
+        body: `token=${props.tokenToDisplay}`
       });
       const matchResponse = await response.json()
-      console.log("matchResponse ",matchResponse);
+      // console.log("matchResponse ",matchResponse);
 
       setMatchList(matchResponse.matchList);
     
@@ -41,27 +41,27 @@ function ScreenMatchPage(props) {
       const findUserResponse = await fetch('/users/finduser', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `token=${/*props.tokenToDisplay*/"ON12xS19FYsNc025aTnIGYpp4ZNtNirB"}`
+        body: `token=${props.tokenToDisplay}`
       });
       const userResponse = await findUserResponse.json()
-      console.log("userResponse", userResponse.userFind);
+      // console.log("userResponse", userResponse.userFind);
       SetUser(userResponse.userFind)
     }
     
     fetchdata()
-  // }
+  }
     }, [props.tokenToDisplay, props])
 
-    // if (!props.tokenToDisplay){
-    //   return <Redirect to="/"  />
-    // }
+    if (!props.tokenToDisplay){
+      return <Redirect to="/"  />
+    }
 
     //AJOUTER UN P2
     async function handleClickAddMatch (addP2) {
       const response = await fetch('/addMatch', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `idP2=${addP2._id}&&token=${/*props.tokenToDisplay*/"ON12xS19FYsNc025aTnIGYpp4ZNtNirB"}`
+        body: `idP2=${addP2._id}&&token=${props.tokenToDisplay}`
       });
       const backResponse = await response.json()
       // console.log("backResponse", backResponse);
@@ -86,7 +86,7 @@ function ScreenMatchPage(props) {
       var newMatchList = matchList.sort(function(a, b){
         return b.idGame.length - a.idGame.length
       })
-      console.log("newMatchList", newMatchList);
+      // console.log("newMatchList", newMatchList);
       
 
 
@@ -153,7 +153,7 @@ function ScreenMatchPage(props) {
                 {serviceTagTable}
               </Col>
               <Col style={{display:"flex", flexDirection:"row-reverse", alignItems:"center"}}>
-                <Button size="sm" onClick={()=> handleClickAddMatch(map)} style={{marginRight:30}} >Ajouter</Button>
+                <Button size="sm" onClick={()=> handleClickAddMatch(map)} style={{marginRight:30}} >Ajouter dans ta liste</Button>
               </Col>
             </Row>
             <Card style={{backgroundColor:"#010212", marginBottom: 10, justifyContent:"center", padding :"20px 15px 5px 15px", borderRadius: 20}}>
