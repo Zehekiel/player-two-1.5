@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Card,  CardTitle, CardText, Button, Table,
-  Row, Container, CardBody, Spinner , Progress
+  Row, Container, CardBody, Spinner , Progress, 
 } from 'reactstrap';
 import { Col } from 'react-bootstrap';
 import {Link, Redirect} from 'react-router-dom'
@@ -17,16 +17,16 @@ function ScreenMatchPage(props) {
 
   useEffect( () => {
 
-    if (props.tokenToDisplay){
+    // if (props.tokenToDisplay){
       async function fetchdata (){
       // plateform from back
       const response = await fetch("/findmatch", {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `token=${props.tokenToDisplay}`
+        body: `token=${/*props.tokenToDisplay*/"ON12xS19FYsNc025aTnIGYpp4ZNtNirB"}`
       });
       const matchResponse = await response.json()
-      // console.log("matchResponse ",matchResponse);
+      console.log("matchResponse ",matchResponse);
 
       setMatchList(matchResponse.matchList);
     
@@ -41,27 +41,27 @@ function ScreenMatchPage(props) {
       const findUserResponse = await fetch('/users/finduser', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `token=${props.tokenToDisplay}`
+        body: `token=${/*props.tokenToDisplay*/"ON12xS19FYsNc025aTnIGYpp4ZNtNirB"}`
       });
       const userResponse = await findUserResponse.json()
-      // console.log("userResponse", userResponse.userFind);
+      console.log("userResponse", userResponse.userFind);
       SetUser(userResponse.userFind)
     }
     
     fetchdata()
-  }
+  // }
     }, [props.tokenToDisplay, props])
 
-    if (!props.tokenToDisplay){
-      return <Redirect to="/"  />
-    }
+    // if (!props.tokenToDisplay){
+    //   return <Redirect to="/"  />
+    // }
 
     //AJOUTER UN P2
     async function handleClickAddMatch (addP2) {
       const response = await fetch('/addMatch', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `idP2=${addP2._id}&&token=${props.tokenToDisplay}`
+        body: `idP2=${addP2._id}&&token=${/*props.tokenToDisplay*/"ON12xS19FYsNc025aTnIGYpp4ZNtNirB"}`
       });
       const backResponse = await response.json()
       // console.log("backResponse", backResponse);
@@ -86,7 +86,7 @@ function ScreenMatchPage(props) {
       var newMatchList = matchList.sort(function(a, b){
         return b.idGame.length - a.idGame.length
       })
-      // console.log("newMatchList", newMatchList);
+      console.log("newMatchList", newMatchList);
       
 
 
@@ -95,15 +95,11 @@ function ScreenMatchPage(props) {
     return (
       <div className="backgroundColor">
         <Container>
-            <Row className="titleTeam" style={{paddingTop:25}}>
-              <Col className="cardbody">
-              <h1  className="heading">Your Player Two</h1>
-              {/* </Col>
-              <Col>
-              <Row>
+            <Row style={{paddingTop:25}}>
+              <h1  className="heading">Your Players Two</h1>
+              {/* <Row>
               <Button style={{marginLeft:600}} onClick={(()=> handleClickAddAllMatch())} size="sm">Ajouter tout</Button>
               </Row>*/}
-              </Col> 
             </Row>
   
           {newMatchList.map((map, i)=> { 
@@ -117,40 +113,57 @@ function ScreenMatchPage(props) {
 
             //AFFICHER Jeux cover & plateforme
             var gameCoverPlateformTable = []
-            for( var l=0; l<newMatchList[i].idGame.length ; l++){
-
-              gameCoverPlateformTable.push(
-                <div>
-                  <tr key={l}>
-                    <td><img src={(`https:${map.idGame[l].cover}`)} alt="game cover"></img></td>
-                    <td className="align-middle">{map.idGame[l].name}</td>
-                    <td className="align-middle">{map.idGame[l].plateforme}</td>
-                  </tr>
-                </div>
-              )
+            function NbPair(Nb){
+              if(Nb/2 == Math.round(Nb/2)) return true;
+              else return false;
             }
 
+            if (NbPair(newMatchList[i].idGame.length) == false ) {
+              var ColumnCompensation =
+                  <Row>
+                    <p style={{height:85, width:85,borderRadius:"0px 0px 0px 40px"}} ></p>
+                  </Row>
+                
+              } 
+            
+              for( var l=0; l<newMatchList[i].idGame.length ; l++){
+                gameCoverPlateformTable.push(
+                  <Row className="divmapmatch" >
+                    <img src={(`https:${map.idGame[l].cover}`)} style={{height:85, width:85,borderRadius:"0px 0px 0px 40px"}} alt="game cover"></img>
+                    <p>{map.idGame[l].name}</p>
+                    <p style={{marginRight:15, width: 90, justifyContent:"start-end"}}>{map.idGame[l].plateforme}</p>
+                  </Row>
+                )
+              }
             
             
             return ( 
           <CardBody   key={i} className="card-background" style={{marginTop: 10 }}>
             <Row style={{alignItems:"center", justifyContent:"space-between", marginLeft: 15, marginBottom:15 , padding:0}}>
-            <Link to={`/screenotheruser/${map._id}`}><img height="50px" width="50px" src={require("../images/P2.svg")} alt="avateur P2" /></Link>
+              <Link to={`/screenotheruser/${map._id}`}>
+                <img height="50px" width="50px" src={map.avatar} alt="avatar P2" />
+              </Link>
+              <Col xs="auto" style={{margin:"0px 20px"}}>
+                <Link to={`/screenotheruser/${map._id}`}>
+                  <CardTitle >{map.pseudo}</CardTitle>
+                </Link>
+                <Progress animated style={{marginBottom: 10}} color="success"  value= {map.idGame.length}   max={user.idGame.length} />
+              </Col>
               <Col xs="auto">
-              <Link to={`/screenotheruser/${map._id}`}><CardTitle >{map.pseudo}</CardTitle></Link>
-                  <Progress animated style={{marginBottom: 10}} color="success"  value= {map.idGame.length}   max={user.idGame.length} />
-              
-              {serviceTagTable}
+                {serviceTagTable}
               </Col>
               <Col style={{display:"flex", flexDirection:"row-reverse", alignItems:"center"}}>
-              <Button size="sm" onClick={()=> handleClickAddMatch(map)} >Ajouter</Button>
+                <Button size="sm" onClick={()=> handleClickAddMatch(map)} style={{marginRight:30}} >Ajouter</Button>
               </Col>
             </Row>
+            <Card style={{backgroundColor:"#010212", marginBottom: 10, justifyContent:"center", padding :"20px 15px 5px 15px", borderRadius: 20}}>
+              
+              <Col style={{columnCount:2, columnGap: "3em",columnFill:"auto",gridTemplateRows:"200px repeat(auto-fill, 100px) 300px"}}>
+                {gameCoverPlateformTable}
+                {ColumnCompensation}
 
-            <Card style={{backgroundColor:"#010212", marginBottom: 10, justifyContent:"center", padding : 15}}>
-            <Table style={{color:'white'}}>
-              {gameCoverPlateformTable}
-              </Table>
+              </Col>
+
             </Card>
           </CardBody>
           )} 

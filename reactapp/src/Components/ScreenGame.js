@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, FormGroup, Label, Input, Form, Card, Button, Table,  InputGroup, InputGroupAddon,} from 'reactstrap';
+import { Col, Container, Row, FormGroup, Label, Input, Form, Card, Button,
+    InputGroup, InputGroupAddon,} from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Modal,} from 'react-bootstrap';
@@ -17,7 +18,7 @@ function ScreenGame(props) {
   const [addGame, setAddGame]= useState("")
   const [cover, setCover]= useState("")
   const [gameName, setGameName]= useState("")
-  const [gameListSelected, setGameListSelected] = useState([])
+  // const [gameListSelected, setGameListSelected] = useState([])  POUVOIR AJOUTER PLUSIEURS JEUX A LA FOIS
   const [searchGameList, setSearchGameList] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [displayService, setDisplayService] = useState("none")
@@ -106,7 +107,7 @@ function ScreenGame(props) {
       searchGameresponse = false
     } 
 
-    if(searchGameresponse.length == 0) {
+    if(searchGameresponse.length === 0) {
       setSearchGameList([{cover:{url:require("../images/JohnTravolta.gif")}, name: `0 jeu trouvé, tu es sûr(e) du nom?` }])
       setModalShow(true)
     }
@@ -117,7 +118,7 @@ function ScreenGame(props) {
       setGameName(gameselect.name)
       setCover(gameselect.cover.url)
       setAddGame(gameselect)
-      setGameListSelected(addGame)
+      // setGameListSelected(addGame)
       setModalShow(false)
       setDisplayService("block")
       // mapDispatchToProps(gameListSelected)
@@ -187,7 +188,7 @@ const SearchGameModal= (props) => {
 
       <Modal.Body>
           { searchGameList.map((game, i)=>( 
-            <div key={i} className='divmap' target="_blank" style={{display: "flex", textDecoration: "none", }}> 
+            <div key={i} className='divmapwithoutbr' target="_blank" style={{display: "flex", textDecoration: "none", }}> 
               <img src={`${game.cover.url}`} style={{borderRadius:"0px 0px 0px 30px", height:90, width:90,}} alt="game cover"></img>
               <p>{game.name}</p>
               <Button onClick={()=>handleGameSelect(game)} outline style={{fontSize:16, fontFamily: 'Comfortaa', paddingLeft:-35}}>Add</Button>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Col, Row, Form, FormGroup, Label, Input, Container, Card, Button, Collapse } from 'reactstrap';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {Modal,} from 'react-bootstrap'  ; 
 import {connect} from 'react-redux';
 

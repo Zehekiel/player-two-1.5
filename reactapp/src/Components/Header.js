@@ -46,7 +46,7 @@ import {connect} from 'react-redux';
       }
     
       var tabErrorsSignIn = listErrorsSignIn.map((error,i) => {
-        return(<p className="error">{error}</p>)
+        return(<p key={i} className="error">{error}</p>)
       })
 
       function clickClose(){
