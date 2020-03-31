@@ -15,10 +15,7 @@ function ScreenOtherUser(props) {
 
   useEffect(() => {
     setUserId(props.tokenToDisplay)
-    
-    if(props.match.params.p2id){
-      setP2Id(props.match.params.p2id)
-    }
+    setP2Id(props.match.params.p2id)
     
 
     async function fetchdata (){
@@ -41,7 +38,9 @@ if(P2 !== "" ){
   var serviceList = []
   for (var i=0; i<P2.service.length; i++){
     serviceList.push(
-      <CardText style={{marginLeft:20}}><span style={{fontWeight:"bold"}}>{P2.service[i].service}</span>: <span style={{fontStyle:"italic"}}> {P2.service[i].tag} </span>  </CardText>
+      <CardText key={i} style={{marginLeft:20}}> 
+        <span style={{fontWeight:"bold"}}>{P2.service[i].service}</span>: <span style={{fontStyle:"italic"}}> {P2.service[i].tag} </span>  
+      </CardText>
     )
   }
 
@@ -49,7 +48,7 @@ if(P2 !== "" ){
   var GameList = []
   for (var j=0; j<P2.idGame.length; j++){
     GameList.push(
-      <tr key={i}>
+      <tr key={j}>
           <td><img src={P2.idGame[j].cover} style={{borderRadius: "10px"}} alt="game cover"></img></td>
           <td className="align-middle">{P2.idGame[j].plateforme}</td>
           <td className="align-middle">{P2.idGame[j].name}</td>

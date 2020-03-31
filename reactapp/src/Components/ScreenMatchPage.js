@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Card,  CardTitle, CardText, Button, Table,
+  Card,  CardTitle, CardText, Button, 
   Row, Container, CardBody, Spinner , Progress, 
 } from 'reactstrap';
 import { Col } from 'react-bootstrap';
@@ -114,11 +114,11 @@ function ScreenMatchPage(props) {
             //AFFICHER Jeux cover & plateforme
             var gameCoverPlateformTable = []
             function NbPair(Nb){
-              if(Nb/2 == Math.round(Nb/2)) return true;
+              if(Nb/2 === Math.round(Nb/2)) return true;
               else return false;
             }
 
-            if (NbPair(newMatchList[i].idGame.length) == false ) {
+            if (NbPair(newMatchList[i].idGame.length) === false ) {
               var ColumnCompensation =
                   <Row>
                     <p style={{height:85, width:85,borderRadius:"0px 0px 0px 40px"}} ></p>
@@ -128,7 +128,7 @@ function ScreenMatchPage(props) {
             
               for( var l=0; l<newMatchList[i].idGame.length ; l++){
                 gameCoverPlateformTable.push(
-                  <Row className="divmapmatch" >
+                  <Row key={l} className="divmapmatch" >
                     <img src={(`https:${map.idGame[l].cover}`)} style={{height:85, width:85,borderRadius:"0px 0px 0px 40px"}} alt="game cover"></img>
                     <p>{map.idGame[l].name}</p>
                     <p style={{marginRight:15, width: 90, justifyContent:"start-end"}}>{map.idGame[l].plateforme}</p>

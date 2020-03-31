@@ -38,7 +38,7 @@ function App() {
             <Route component={ScreenOtherUser} path="/screenotheruser/:p2id"  />
             {/* <Route component={ScreenteamAdmin} path="/screenteamadmin"  />
             <Route component={ScreenteamView} path="/screenteamview"  /> */}
-            <Route component={ScreenUser} path="/screenuser"  />
+            <Route component={ScreenUser} path="/screenuser" />
           </Switch>
       </Router>
     </Provider>

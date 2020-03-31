@@ -82,6 +82,7 @@ function ScreenUser(props) {
     const [mail, setMail] = useState("")
     const [CP, setCP] = useState("")
     const [myArticlesList, setMyArticlesList] = useState ([])
+    const [token, setToken]= useState('')
   //modals
     const [newsModalShow, setNewsModalShow] = React.useState(false);
     const [userManagementModal,setuserManagementModal] = useState(false)
@@ -95,13 +96,13 @@ function ScreenUser(props) {
 
   //la fonction d'appel MongoDB pour les UserData
   useEffect(() => {
-    if(props.tokenToDisplay){
-      // setToken(props.tokenToDisplay)
-    }
-  
 
   //vérifier si User est connecté (store Redux)
   if(props.tokenToDisplay){
+    
+    console.log('tokenToDisplay token', props.tokenToDisplay);
+    setToken(props.tokenToDisplay)
+    console.log('token', token);
       
       //si oui récupérer ses info dans DBA
       async function userData(){
@@ -132,11 +133,8 @@ function ScreenUser(props) {
       }
       articleData()
     } 
-  }, [props.tokenToDisplay, /*token*/])
+  }, [props.tokenToDisplay, token])
 
-  if (!props.tokenToDisplay){
-    return <Redirect to="/"  />
-  }
 
   // LISTE DES ARTICLES
   var cardArticle = [];
@@ -227,8 +225,15 @@ function ScreenUser(props) {
           centered
           style={{borderRadius: "0px 50px", boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)",}}
         >
-          <ModalHeader style={{backgroundColor: '#010212', color:"#F9F5FF"  }}>Modifications effectuées:</ModalHeader>
-          <ModalBody style={{backgroundColor: '#010212', color:"#F9F5FF"}}> {tabListSuccess} </ModalBody>
+
+          <ModalHeader style={{backgroundColor: '#010212', color:"#F9F5FF"  }}>
+            Modifications effectuées:
+          </ModalHeader>
+
+          <ModalBody className="modalbody-footer"> 
+            {tabListSuccess} 
+          </ModalBody>
+      
           <ModalFooter style={{backgroundColor: '#010212', color:"#F9F5FF",borderRadius: "0px 0px 100px 0px" ,justifyContent:"center"}}>
             <Button color="secondary" outline onClick={toggleAll}>Fermer</Button>
           </ModalFooter>
@@ -293,7 +298,6 @@ function ScreenUser(props) {
     const [newMail, setNewMail] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [newCP, setNewCP] = useState('')
-    
 
 
     const toggleNested = () => {
@@ -306,7 +310,7 @@ function ScreenUser(props) {
       const data = await fetch('/users/usermanager', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `pseudoFromFront=${newPseudo}&token=${props.token}&mailFromFront=${newMail}&passwordFromFront=${newPassword}&cpFromFront=${newCP}&avatarFromFront=${newAvatar}` /*&langueFromFront=${language}&*/
+        body: `pseudoFromFront=${newPseudo}&token=${token}&mailFromFront=${newMail}&passwordFromFront=${newPassword}&cpFromFront=${newCP}&avatarFromFront=${newAvatar}` /*&langueFromFront=${language}&*/
       })
       const body = await data.json()
 
@@ -401,10 +405,10 @@ function ScreenUser(props) {
           </Button>
         </Modal.Header>
   
-        <Modal.Body style={{color: 'white', backgroundColor: '#010212'}}>
+        <Modal.Body className="modalbody-footer">
   
           <Form >
-            <Card style={{ backgroundColor: '#010212', borderRadius: "0px 50px", marginTop:"20px", padding:"20px 40px 20px 40px"}}>
+            <Card style={{ backgroundColor: '#010212', marginTop:"20px", padding:"20px 40px 20px 40px"}}>
               
               {/* PSEUDO */}
               <FormGroup row className="boldFont" style={{paddingTop:20}}>
@@ -461,7 +465,11 @@ function ScreenUser(props) {
       </div>
     );
   }
+  console.log("props.tokenToDisplay end ", props.tokenToDisplay);
 
+  if (!props.tokenToDisplay){
+    return <Redirect to="/"  />
+  }
 
   // ___________________________________ RETURN ___________________________________
   return (
@@ -569,7 +577,7 @@ function ScreenUser(props) {
               return(
                 <CardBody key={i*100} className="card-background" style={{ borderRadius:"0 50", backgroundColor:"transparente", marginBottom:10}}>
                   <Row style={{paddingInline: "20px", display:"flex", alignItems: "center", marginBottom: "10px", alignContent:"space-between"}}>
-                    <img height="3%" width="10%" src={map.avatar} alt="avateur P2" />
+                    <img  src={map.avatar} style={{height:"55px", width:"55px",paddingLeft: "15px", paddingBottom:"12px"}} alt="avateur P2" />
                     <Col xs="auto">
                       <Link to={`/screenotheruser/${map._id}`}>
                         <CardTitle> {map.pseudo} </CardTitle>

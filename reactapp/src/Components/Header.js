@@ -18,10 +18,11 @@ import {connect} from 'react-redux';
       const [signInPassword, setSignInPassword] = useState('')
       const [userExists, setUserExists] = useState(false)
       const [listErrorsSignIn, setErrorsSignIn] = useState([])
-      
+
     
     
       var handleSubmitSignIn = async () => {
+    console.log("handleSubmitSignIn");
     
         const data = await fetch('/users/connection', {
           method: 'POST',
@@ -31,19 +32,25 @@ import {connect} from 'react-redux';
     
         const body = await data.json()
 
-        if(body.result === true){
+        if(body.result === true ){
+          console.log("body.result === true");
           setUserExists(true)
-          props.addToken(body.token)
+          props.addtoken(body.token)
           props.onHide()
           setErrorsSignIn([])
         } else {
+          console.log("else");
           setErrorsSignIn(body.error)
         }
+
+        console.log(props.tokenToDisplay);
+        console.log(userExists);
+        if(userExists /*&& props.tokenToDisplay*/){
+          console.log("userExists");
+          return <Redirect to='/screenuser'/>
+        }
       }
-    
-      if(userExists){
-        return <Redirect to='/screenuser'/>
-      }
+
     
       var tabErrorsSignIn = listErrorsSignIn.map((error,i) => {
         return(<p key={i} className="error">{error}</p>)
@@ -53,6 +60,8 @@ import {connect} from 'react-redux';
         setErrorsSignIn([])
         props.onHide()
       }
+
+
 
       // --- return of modal --- 
       return (
@@ -420,14 +429,15 @@ function CustomIconSwitch (props) {
 
   useEffect(() => {
     const findToken = () => {
-      setToken(props.token)
-      if(props.token){
+      setToken(props.tokenToDisplay)
+      if(props.tokenToDisplay){
         setChecked(true)
       }
+
     }    
     findToken()
 
-  }, [props.token]);
+  }, [props.tokenToDisplay]);
 
   // CLICK X de la modal
   var clickCloseModal = (checkedhandle, modalShowhandle) =>{
@@ -435,12 +445,12 @@ function CustomIconSwitch (props) {
     setModalShow(modalShowhandle)
   };
 
-  if(props.token){
+  if(props.tokenToDisplay){
     async function userData(){
       const data = await fetch('/users/finduser', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `token=${props.token}`
+      body: `token=${props.tokenToDisplay}`
     })
     const body = await data.json()
     // console.log("header finduser respone ", body);
@@ -454,16 +464,17 @@ function CustomIconSwitch (props) {
       setChecked(true)
       setModalShow(true)
       props.logout()
-      return  <Redirect to='/'/>
+      return (<Redirect to='/'/>)
     } else {
       setChecked(false)
       setModalShow(false)
       setToken(null)
-      return <Redirect to='/'/>
     }
-
   };
 
+
+
+  
   //____________________________ RETURN _________________________________
   return(
     <div>
@@ -486,7 +497,7 @@ function CustomIconSwitch (props) {
       <SignInModal
         show={modalShow}
         onHide={() => clickCloseModal(false, false)}
-        addToken={props.addToken}
+        addtoken= {props.addToToken}
       />
 
       {/* <ShareModal
@@ -583,13 +594,13 @@ function CustomIconSwitch (props) {
     //-----------FIN COMPOSANT PRESENTATION-----------//
 
 
-function mapStateToProps(state){
-  return {token: state.token}
-}
+  function mapStateToProps(state){
+    return {tokenToDisplay: state.token}
+  }
 
 function mapDispatchToProps(dispatch){
   return {
-    addToken: function(token){
+    addToToken: function(token){
       dispatch({type: 'addToken', token})
     },
     logout: function(token) {

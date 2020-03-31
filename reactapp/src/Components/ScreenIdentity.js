@@ -324,7 +324,7 @@ const SignInModal= (props) => {
           <FormGroup className="nextButton boldFont" style={{margin:0,  paddingTop:25, marginRight:20, justifyContent:"center"}}>
             <Button onClick={() => setModalShow(true)} color="transparent" style={{padding:0}}>
               <img style={{height:"100px", width:"100px",transform: 'rotate(180deg)'}} src={require('../images/button.svg')} alt="button start"/>
-              <div className="textButton" style={{paddingLeft:20}}> inscrit?</div>
+              <div className="textButton" style={{paddingLeft:16}}> inscrit?</div>
             </Button>
           </FormGroup>
 

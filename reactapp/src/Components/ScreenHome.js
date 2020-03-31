@@ -181,6 +181,8 @@ function ScreenHome() {
         const response = await fetch('/top5fromP2');
         const top5fromP2 = await response.json()
         setTop5(top5fromP2)
+
+
     }
     findArticle()
   }, [])
@@ -250,11 +252,12 @@ function ScreenHome() {
     />
 
 
-    <div>
-      <FormGroup className="nextButton boldFont" style={{margin:0, paddingTop:25, justifyContent:"center"}}>
+    <div className="animationP2Button">
+      <FormGroup className="p2Button" style={{margin:0, paddingTop:25, justifyContent:"center"}}>
         <Link to="screenidentity">
+          {/* <div className="invader"></div> */}
           <img style={{height:"180px", width:"200px",}}  src={require('../images/button.svg')} alt="button start"/>
-          <div style={{paddingBottom:"20px",paddingLeft:"1%", fontSize:"14px"}} className="textButton">Find your Player Two</div>
+          <div  className="textP2Button ">Find your Player Two</div>
         </Link>
       </FormGroup>
     </div>
@@ -282,7 +285,7 @@ function ScreenHome() {
       <Card.Body>
         <Card.Title>Comment ça marche ?</Card.Title>
         <Card.Text style={{font: 'comfortaa'}}>
-        C'est simple : Tu cliques sur le gros bouton "Find your Player 2", tu ajoutes une plateforme, tu cherches un jeu et tu trouves ton Player 2 !
+        C'est plus simple que ça en à l'air: <br/>tu cliques sur le bouton "Find your Player Two" haut puis tu te connectes ensuite tu cherches un jeu et tu trouves ceux qui joues au même jeu que toi <br/> Tu n'as plus qu'à les rejoindre sur la plateforme que vous avez en commun!
         </Card.Text>
       </Card.Body>
     </Card>

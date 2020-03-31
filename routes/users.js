@@ -232,7 +232,7 @@ router.post('/usermanager', async function(req, res, next) {
   
 
   //trouver l'utilisateur
-    var userFind = await userModel.findOne({token: req.body.token})
+  var userFind = await userModel.findOne({token: req.body.token})
   console.log("userFind usermanager",userFind);
   
   console.log("req.body.pseudoFromFront", req.body.pseudoFromFront);
