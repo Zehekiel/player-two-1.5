@@ -17,101 +17,6 @@ router.get('/', function(req, res, next) {
 
 
 
-/*       ARTICLES        */
-router.get('/articles', async function(req, res, next) {
-
-  var result = request('GET' , 'https://www.gamekult.com/actualite.html')
-
-  var articles = []
-
-  if(result.statusCode < 300){
-    const $ = cheerio.load(result.body)
-    $('.ed__news-h__mdb').each(function(){
-
-      let title = $(this).find('.gk__helpers__fat-title-m').text()
-      title = title.substring(17, title.length -13)
-
-      let subTitle = $(this).find('.gk__helpers__subtitle-s').text()
-
-      let image = $(this).find('img').data('src')
-
-      if(image === undefined){
-        image = $(this).find('img').attr('src')
-      }
-    
-      let link = $(this).find('a').attr('href')
-      link = `https://www.gamekult.com${link}`
-
-      articles.push({title, subTitle, image, link})
-    })
-  }
-  res.json({articles});
-});
-
-/*       POPULAR GAMES        */
-router.get('/popularGames', async function(req, res, next) {
-
-  var result = request('GET' , 'https://www.gamekult.com/jeux/les-plus-populaires.html')
-
-  var games = []
-
-  if(result.statusCode < 300){
-    const $ = cheerio.load(result.body)
-    $('.pr__game-h__mdb').each(function(){
-
-      let title = $(this).find('.pr__game-h__mdb__details__title').text().replace(/\s+/g, " ")
-
-      let category = $(this).find('.pr__game-h__mdb__details__category').text().replace(/\s+/g, " ")
-      
-      let detailsCompany = $(this).find('.pr__game-h__mdb__details__company').text().replace(/\s+/g, " ")
-
-      let tag = $(this).find('.pr__game-h__mdb__details__tag').text().replace(/\s+/g, "-")
-
-      let image = $(this).find('img').data('src')
-
-      let link = $(this).find('a').attr('href')
-          link = `https://www.gamekult.com${link}`
-
-      games.push({title, category, detailsCompany, tag, image, link})
-    })
-  }
-  res.json({games});
-});
-
-
-
-/*       MON FIL D'ACTUALITÉ        */
-router.get('/myArticles', async function(req, res, next) {
-
-  var result = request('GET' , 'https://www.gamekult.com/actualite.html')
-
-  var myArticles = []
-
-  if(result.statusCode < 300){
-    const $ = cheerio.load(result.body)
-    $('.ed__news-h__mdb').each(function(){
-
-      let title = $(this).find('.gk__helpers__fat-title-m').text()
-      title = title.substring(17, title.length -13)
-
-      let subTitle = $(this).find('.gk__helpers__subtitle-s').text()
-
-      let image = $(this).find('img').data('src')
-
-      if(image === undefined){
-        image = $(this).find('img').attr('src')
-      }
-    
-      let link = $(this).find('a').attr('href')
-      link = `https://www.gamekult.com${link}`
-
-      myArticles.push({title, subTitle, image, link})
-    })
-  }
-  res.json({myArticles});
-});
-
-
 
 // ______________ PLATEFORMS ______________ (ok)
 //ajout de plateform (use postman)
@@ -148,6 +53,7 @@ router.post('/service', async function(req, res, next) {
   //puis le renvoyé au front
   res.json(findPlateform)
 });
+
 
 
 // ______________ ADD GAME ______________
@@ -230,6 +136,8 @@ router.post('/addgame', async function(req, res, next) {
     
   };
 
+
+
   //____ Service & Tag ____
   console.log("service - tag ",req.body.service," - " ,req.body.tag );
   
@@ -272,8 +180,8 @@ router.post('/addgame', async function(req, res, next) {
     result= false
     res.json({ error: 'déjà un identifiant service'})
   } 
-
 });
+
 
 
 //API IGBD
@@ -352,6 +260,8 @@ router.post('/searchgame', async function(req, res, next) {
   
 });
 
+
+
 // ________ FIND A MATCH ________
 router.post('/findmatch', async function(req, res, next) {
   console.log("req body findmatch", req.body);
@@ -383,6 +293,8 @@ router.post('/findmatch', async function(req, res, next) {
   
 })
 
+
+
 // AJOUTER UN MATCH
 router.post('/addMatch', async function(req, res, next) {
   console.log(req.body.idP2);
@@ -396,7 +308,7 @@ router.post('/addMatch', async function(req, res, next) {
   // console.log("matchFind ", matchFind);
   
   if (userFind.playerTwo.indexOf(req.body.idP2)== -1){
-    //ajoute un ObectID P2 chez userFind
+    //ajoute un ObjectID P2 chez userFind
     copyPlayerTwo = userFind.playerTwo
     // console.log('copyPlayerTwo', copyPlayerTwo);
     copyPlayerTwo.push(req.body.idP2)
@@ -417,6 +329,8 @@ router.post('/addMatch', async function(req, res, next) {
     
   }
 })
+
+
 
   router.post('/addAllMatch', async function(req, res, next) {
     console.log(req.body);
@@ -448,7 +362,9 @@ router.post('/addMatch', async function(req, res, next) {
     //   res.json({result , error});
     // } 
   })
-  
+
+
+
   // TOP 5  DES JEUX PRISEE SUR P2
   router.get('/top5fromP2', async function(req, res, next) {
     // Récupérer les jeux qui ont un count > 1

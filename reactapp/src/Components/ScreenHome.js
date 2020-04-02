@@ -51,7 +51,7 @@ function ArticlesModal(props) {
 
   useEffect(() => {
     const findArticle = async () => {
-      const data = await fetch('/articles')
+      const data = await fetch('/scrappings/articles')
       const body = await data.json()
       setArticlesList(body.articles)
     }
@@ -106,7 +106,7 @@ function PopularGamesModal(props) {
 
   useEffect(() => {
     const findArticle = async () => {
-      const dataPopularGames = await fetch('/popularGames')
+      const dataPopularGames = await fetch('/scrappings/popularGames')
       const bodyPopularGames = await dataPopularGames.json()
       setPopularGamesList(bodyPopularGames.games)
     }
@@ -168,12 +168,12 @@ function ScreenHome() {
   useEffect(() => {
     const findArticle = async () => {
       //récuper les articles
-        const data = await fetch('/articles')
+        const data = await fetch('/scrappings/articles')
         const body = await data.json()
         setArticlesList(body.articles)
 
       // récupérer les jeux populaires
-        const dataPopularGames = await fetch('/popularGames')
+        const dataPopularGames = await fetch('/scrappings/popularGames')
         const bodyPopularGames = await dataPopularGames.json()
         setPopularGamesList(bodyPopularGames.games)
 

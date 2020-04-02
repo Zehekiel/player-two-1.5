@@ -4,23 +4,22 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 //routes
-import ScreenHome from '../../reactapp/src/Components/ScreenHome';
-// import ScreenHome from '../src/Components/ScreenHome';
-import ScreenIdentity from './Components/ScreenIdentity';
-import ScreenGame from './Components/ScreenGame';
-// import ScreenWish from './Components/ScreenWish';
-import ScreenOtherUser from './Components/ScreenOtherUser';
-// import ScreenteamAdmin from './Components/ScreenteamAdmin';
-// import ScreenteamView from './Components/ScreenteamView';
-import ScreenUser from './Components/ScreenUser';
-import ScreenMatchPage from './Components/ScreenMatchPage';
-import Header from "./Components/Header"
+  import Header from "./Components/Header"
+  import ScreenHome from '../../reactapp/src/Components/ScreenHome';
+  import ScreenIdentity from './Components/ScreenIdentity';
+  import ScreenGame from './Components/ScreenGame';
+  import ScreenOtherUser from './Components/ScreenOtherUser';
+    // import ScreenWish from './Components/ScreenWish';
+    // import ScreenteamAdmin from './Components/ScreenteamAdmin';
+    // import ScreenteamView from './Components/ScreenteamView';
+  import ScreenUser from './Components/ScreenUser';
+  import ScreenMatchPage from './Components/ScreenMatchPage';
 //redux
-import token from './reducer/token'
-import game from './reducer/game'
-import {Provider} from 'react-redux'
-import {createStore, combineReducers} from 'redux'
-const store = createStore(combineReducers({game, token}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  import token from './reducer/token'
+  import game from './reducer/game'
+  import {Provider} from 'react-redux'
+  import {createStore, combineReducers} from 'redux'
+  const store = createStore(combineReducers({game, token}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 function App() {

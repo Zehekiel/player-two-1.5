@@ -167,8 +167,12 @@ a:hover{
   }
 }
 
-
-
+.textScreenGameButton {
+  position: absolute;
+  top: 50%;
+  margin-left: 15px;
+  color: #F9F5FF;
+}
 
 .textButton {
   position: absolute;
@@ -216,7 +220,7 @@ div{
 }
 
 .backgroundColor{
-  min-height: 90.7vh;
+  min-height: 92vh;
   padding: 15px;
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 40%, rgba(84,5,119,1) 70%, rgba(2,0,36,1) 100%);
@@ -409,7 +413,7 @@ element.style{
     background-color: transparent !important;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.2);
-    border-radius:0px 0px 90px 50px !important;
+    border-radius:0px 0px 60px 50px !important;
     outline: 0;
     box-shadow: 0px 4px 4px rgba(231, 10, 10, 0.7);
 }
@@ -475,7 +479,7 @@ button.btn.btn-primary{
   padding: 10px !important;
   color: white;
   background-color: #010212;
-  border-Radius: 0px 0px 90px 40px;
+  border-Radius: 0px 0px 60px 40px;
   box-Shadow:0px 4px 4px rgba(144, 14, 205, 0.8);
 }
 
@@ -491,7 +495,7 @@ button.btn.btn-primary{
   justify-content: center!important;
   color: white;
   background-Color: #010212; 
-  border-Radius: 0px 0px 90px 60px !important;
+  border-Radius: 0px 0px 60px 60px !important;
   box-Shadow:0px 4px 4px rgba(144, 14, 205, 0.8);
 
 }
@@ -502,11 +506,16 @@ button.btn.btn-primary.btn-sm{
   background-Color: #18198A !important; 
 }
 
+button.btn.btn-outline-secondary{
+  margin-right: 10px;
+  border-Radius: 0px 0px 15px 0px;
+}
+
 .divmap{
   margin: 10px;
   align-Items:center;
   justify-content: space-between;
-  border-Radius: 0px 0px 90px 40px;
+  border-Radius: 0px 0px 60px 40px;
   padding: 7px;
   color: white;
   background-Color: #010212;

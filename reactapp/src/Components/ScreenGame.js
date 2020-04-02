@@ -246,7 +246,7 @@ const SearchGameModal= (props) => {
                     <Input required style={{borderRadius:25}} onChange={(e)=> handleSearchGame(e.target.value)} type="search" placeholder="ex: GTA 5, Fortnite, ..."/>
                     <InputGroupAddon addonType="append" style={{paddingLeft:10}}>
                       <Button color={outlineSearch} outline onClick={(e) => handleClickSearchGame(e.target.value)} style={{borderRadius:25}}>
-                        Résultats
+                        Rechercher
                         <img   style={{height:15, paddingLeft:10}} src={require("../images/search.svg")} alt=""/>
                       </Button>
                     </InputGroupAddon>
@@ -294,7 +294,7 @@ const SearchGameModal= (props) => {
         <Row className="nextButton boldFont" style={{margin:0, paddingTop:25,}}>
           <Button color="transparent" onClick={OnclickStartGame} style={{padding: 0}}>
             <img style={{height:"100px", width:"100px"}} src={require('../images/button.svg')} alt="button start"/>
-            <div className="textButton">Start</div>
+            <div className="textScreenGameButton">Start</div>
           </Button>
         </Row>
 

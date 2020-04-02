@@ -17,7 +17,7 @@ function ArticlesModal(props) {
   useEffect(() => {
 
     const findArticle = async () => {
-      const data = await fetch('/myArticles')
+      const data = await fetch('/scrappings/myArticles')
       const body = await data.json()
       setArticlesList(body.myArticles)
     }
@@ -127,7 +127,7 @@ function ScreenUser(props) {
       userData()
       //    RECUPERATION DE MES ACTUALITÉS    //
       async function articleData(){
-        const data = await fetch('/myArticles')
+        const data = await fetch('/scrappings/myArticles')
         const body = await data.json()
         setMyArticlesList(body.myArticles)
       }
