@@ -25,16 +25,19 @@ function MyVerticallyCenteredModal(props) {
         <h4>Player Two</h4>
         <p>En 2020, nous avons créé Player Two à destination des Gamers. Nous pensions qu’il fallait répondre à une vraie demande venant de tous ces Gamers et Gameuses qui cherchent leur Player Two.</p>
         <p>Ensuite, il a été nécessaire d’apporter une réponse personnalisée à toutes les demandes que nous recevions. Nous avons donc mis en place notre système de matching afin de trouver le joueur qui vous correspond.</p>
+        <br/>
         <h5>Notre objectif ?</h5>
         <p>Vous permettre de trouver le joueur qui correspond à vos attentes.</p>
+        <br/>
         <h5>Nos points forts ?</h5>
         <li>Notre réactivité : réponse sous 24h</li>
         <li>Entreprise à taille humaine</li>
         <li>La qualité de notre système de Matching</li>
-        <p></p>
+        <br/>
         <h5>Notre rêve ?</h5>
         <p>Que chaque joueur de France ait le « réflexe Player Two » pour jouer, rencontrer, chatter… bref, faire vivre son expérience de jeu.</p>
         <p>Finalement, chaque entreprise est comme une boule de neige. Depuis 2020 Playertwo.fr a tracé une jolie route. Et ce n’est pas fini…</p>
+        <br/>
       </Modal.Body>
 
     </Modal>
@@ -252,15 +255,14 @@ function ScreenHome() {
     />
 
 
-    <div className="animationP2Button">
-      <FormGroup className="p2Button" style={{margin:0, paddingTop:25, justifyContent:"center"}}>
+      <FormGroup className="p2Button" style={{margin:0, paddingTop:25,}}>
         <Link to="screenidentity">
           {/* <div className="invader"></div> */}
           <img style={{height:"180px", width:"200px",}}  src={require('../images/button.svg')} alt="button start"/>
-          <div  className="textP2Button ">Find your Player Two</div>
+          <p  className="textP2Button ">Find your Player Two </p>
         </Link>
       </FormGroup>
-    </div>
+
 
     <CardColumns style={{paddingTop:25}}>
 
@@ -283,9 +285,11 @@ function ScreenHome() {
 
     <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
       <Card.Body>
-        <Card.Title>Comment ça marche ?</Card.Title>
+        <Card.Title>Quesaco</Card.Title>
         <Card.Text style={{font: 'comfortaa'}}>
-        C'est plus simple que ça en à l'air: <br/>tu cliques sur le bouton "Find your Player Two" haut puis tu te connectes ensuite tu cherches un jeu et tu trouves ceux qui joues au même jeu que toi <br/> Tu n'as plus qu'à les rejoindre sur la plateforme que vous avez en commun!
+        C'est plus simple que ça en à l'air : <br/>
+        Tu cliques sur le bouton "Find your Player Two" en haut puis tu te connectes ensuite tu cherches un jeu et tu trouves ceux qui jouent au même jeu que toi. <br/> 
+        Tu n'as plus qu'à les rejoindre sur la plateforme que vous avez en commun !
         </Card.Text>
       </Card.Body>
     </Card>
@@ -323,7 +327,7 @@ function ScreenHome() {
 
     <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
       <Card.Body style={{paddingBottom: 0}}>
-        <Card.Title>Actualité du jeu vidéo</Card.Title>
+        <Card.Title>Actualités du jeu vidéo</Card.Title>
       <br></br>
         {cardArticle}
           <div style={{marginTop: 5, display: "flex", justifyContent: "center"}}>
@@ -345,7 +349,8 @@ function ScreenHome() {
         <Card.Body>
           <Card.Title>Actu Player 2</Card.Title>
           <Card.Text>
-          Envie de nous affronter ? On t'attend !!!
+          Envie de nous affronter ? <br/>
+          On t'attend !!!
           </Card.Text>
         </Card.Body>
       </Card>

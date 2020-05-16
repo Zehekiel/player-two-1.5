@@ -142,8 +142,15 @@ router.post('/finduser', async function(req, res, next) {
 });
 
 
+// _____________________ FIND avatar from User for Header _____________________
+router.post('/findavatar', async function(req, res, next) {
+  console.log("req.body finduser", req.body);
+  var userFind = await userModel.findOne({token: req.body.token})
+  res.json({userFind})
+});
 
-// TROUVER un P2
+
+// _____________________ TROUVER un P2 _____________________
 router.post('/findP2', async function(req, res, next) {
   console.log("req.body findP2", req.body);
   if(req.body){
@@ -155,7 +162,7 @@ router.post('/findP2', async function(req, res, next) {
 
 
 
-// suppr un jeux de la liste user
+// _____________________ suppr un jeux de la liste user _____________________
 router.post('/supprGame', async function(req, res, next) {
   console.log("reqbody supprgame", req.body);
 
@@ -181,7 +188,7 @@ router.post('/supprGame', async function(req, res, next) {
 
 
 
-// suppr un P2 de la liste user
+// _____________________ suppr un P2 de la liste user _____________________
 router.post('/supprP2', async function(req, res, next) {
   //trouver l'utilisateur
     var userFind = await userModel.findOne({token: req.body.token})
@@ -205,38 +212,15 @@ router.post('/supprP2', async function(req, res, next) {
 })
 
 
-
-// SUPPRIMER un GAME
-router.post('/supprGame', async function(req, res, next) {
-  var userFind = await userModel.findOne({token: req.body.token})
-  var copyIdGame= userFind.idGame
-  for (var i=0; i<copyIdGame.length; i++){
-    if (userFind.idGame[i]._id == req.body.gameId){
-      copyIdGame.splice(i,1)
-    }
-  }
-  var supprGameToUser = await userModel.updateOne({token: req.body.token }, {
-    idGame: copyIdGame
-  })
-  var userFind2 = await userModel.findOne({token: req.body.token})
-  res.json(userFind2)
-})
-
-
-
-// MODIFIER les informations
+// _____________________ MODIFIER les informations _____________________
 router.post('/usermanager', async function(req, res, next) {
   console.log("req.body userManager ", req.body);
   var error = []
   var success = []
-  
 
   //trouver l'utilisateur
   var userFind = await userModel.findOne({token: req.body.token})
-  console.log("userFind usermanager",userFind);
-  
-  console.log("req.body.pseudoFromFront", req.body.pseudoFromFront);
-  console.log("userFind Pseudo usermanager",userFind.pseudo);
+
   //Vérifier s'il veut changer son pseudo
   if(req.body.pseudoFromFront !== ''){
     //vérifier que ce nouveau pseudo n'est pas déjà utilisé
@@ -255,49 +239,49 @@ router.post('/usermanager', async function(req, res, next) {
     }
   }
 
-    //Vérifier s'il veut changer son mail
-    if(req.body.mailFromFront !==""){
-      //vérifier que ce nouveau mail n'est pas déjà utilisé
-      var mailExists = await userModel.findOne({mail: req.body.mailFromFront })
-      //si oui, le modifier
-      if(!mailExists){
-        await userModel.updateOne({token: req.body.token }, {
-          mail: req.body.mailFromFront
-      })
-      success = [...success, "mail modifé"]
-      // sinon envoyer un message d'erreur
-      } else {
-        error=[...error, "mail déjà existant"]
-      }
-    }
-
-    //Modifier le mot de passe
-    if (req.body.passwordFromFront !== ''){
-      if(req.body.passwordFromFront.length<5){
-      error.push('le mot de passe doit contenir au moins 6 caractères')
-      }else {
-        await userModel.updateOne({token: req.body.token }, {
-          password:  SHA256(req.body.passwordFromFront+ userFind.salt).toString(encBase64),
-      })
-        success= [...success, 'mot de passe modifié']
-      }
-    } 
-
-    //Modifier le CP
-    if (req.body.cpFromFront !==''){
+  //Vérifier s'il veut changer son mail
+  if(req.body.mailFromFront !==""){
+    //vérifier que ce nouveau mail n'est pas déjà utilisé
+    var mailExists = await userModel.findOne({mail: req.body.mailFromFront })
+    //si oui, le modifier
+    if(!mailExists){
       await userModel.updateOne({token: req.body.token }, {
-        CP:  req.body.cpFromFront,
+        mail: req.body.mailFromFront
     })
-    success= [...success, 'Code Postal modifié']
+    success = [...success, "mail modifé"]
+    // sinon envoyer un message d'erreur
+    } else {
+      error=[...error, "mail déjà existant"]
     }
+  }
 
-    //modifier l'avatar
-    if (req.body.avatarFromFront.length>0){
+  //Modifier le mot de passe
+  if (req.body.passwordFromFront !== ''){
+    if(req.body.passwordFromFront.length<5){
+    error.push('le mot de passe doit contenir au moins 6 caractères')
+    }else {
       await userModel.updateOne({token: req.body.token }, {
-        avatar:  req.body.avatarFromFront,
+        password:  SHA256(req.body.passwordFromFront+ userFind.salt).toString(encBase64),
     })
-    success= [...success, 'avatar modifié']
+      success= [...success, 'mot de passe modifié']
     }
+  } 
+
+  //Modifier le CP
+  if (req.body.cpFromFront !==''){
+    await userModel.updateOne({token: req.body.token }, {
+      CP:  req.body.cpFromFront,
+  })
+  success= [...success, 'Code Postal modifié']
+  }
+
+  //modifier l'avatar
+  if (req.body.avatarFromFront.length>0){
+    await userModel.updateOne({token: req.body.token }, {
+      avatar:  req.body.avatarFromFront,
+  })
+  success= [...success, 'avatar modifié']
+  }
 
   userFind = await userModel.findOne({token: req.body.token})
   res.json({userFind, error, success})

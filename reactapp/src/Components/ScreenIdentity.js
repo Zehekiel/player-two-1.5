@@ -15,7 +15,7 @@ const ScreenIdentity = (props) => {
   const [country, setCountry] = useState('')
   const [gender, setGender] = useState('')
   const [language, setLanguage] = useState('')
-  const [avatar, setAvatar] = useState('')
+  const [avatar, setAvatar] = useState('/P1.svg')
   const [userExists, setUserExists] = useState(false)
   const [listErrorsSignup, setErrorsSignup] = useState([])
   const [token, setToken] = useState('')
@@ -328,6 +328,7 @@ const SignInModal= (props) => {
             </Button>
           </FormGroup>
 
+        {/* Boutton Start */}
           <FormGroup className="nextButton boldFont" style={{margin:0,  paddingTop:25, justifyContent:"center"}}>
             <Button onClick={() => handleSubmitSignup()} color="transparent" style={{padding:0}}>
               <img style={{height:"100px", width:"100px"}} src={require('../images/button.svg')} alt="button start"/>

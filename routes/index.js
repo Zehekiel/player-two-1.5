@@ -289,8 +289,6 @@ router.post('/findmatch', async function(req, res, next) {
     error.push("pas de match")
     res.json({matchList, error})
   }
-
-  
 })
 
 

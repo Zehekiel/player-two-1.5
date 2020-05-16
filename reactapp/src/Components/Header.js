@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Switch from "react-switch"
-import {Link} from 'react-router-dom'
+// import Switch from 'react-switch';
+// import 'antd/dist/antd.css';
+// import { Switch } from 'antd';
+// import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import {Link} from 'react-router-dom';
 import logo from '../images/logoP2.svg';
 import logout from '../images/logout.svg';
 import {Row, Col, Input, 
@@ -91,7 +94,6 @@ import {connect} from 'react-redux';
         </Modal>
       );
     }
-    //---------FIN MODAL SIGN IN-----------//
 
     // modal contact
     function ContactModal(props) {
@@ -119,7 +121,6 @@ import {connect} from 'react-redux';
         
       );
     }
-    //fin modal contact
 
     // MODAL POLITIQUE
     function PolitiqueModal(props) {
@@ -334,7 +335,6 @@ import {connect} from 'react-redux';
         </Modal>
       );
     }
-    // FIN MODAL POLITIQUE
 
     // MODAL MENTION
     function MentionModal(props) {
@@ -365,7 +365,7 @@ import {connect} from 'react-redux';
             <p>Adresse: P.O. Box 81226, Seattle, WA 98108-1226</p>
             <p>Le stockage des données personnelles des Utilisateurs est exclusivement réalisé sur les centre de données (“clusters”) localisés dans des Etats membres de l’Union Européenne de la société Amazon Web Services LLC</p>
             <h5>Nous contacter</h5>
-            <p>Par email : playertwo.fr</p>
+            <p>Par email : playertwo.help@gmail.com</p>
             <h5>CNIL</h5>
             <p>La société PlayerTwo conservera dans ses systèmes informatiques et dans des conditions raisonnables de sécurité une preuve de la transaction comprenant le bon de commande et la facture.</p>
             <p>La société PlayerTwo a fait l’objet d’une déclaration à la CNIL sous le numéro 1986932.</p>
@@ -376,9 +376,9 @@ import {connect} from 'react-redux';
         </Modal>
       );
     }
-    // FIN MODAL MENTION
 
-    // // MODAL SHARE
+
+    /* // (en suspend) MODAL SHARE
     // function ShareModal(props) {
     //   return (
     //     <Modal
@@ -410,13 +410,13 @@ import {connect} from 'react-redux';
     //     </Modal>
     //   );
     // }
-    // // FIN MODAL SHARE
+    // FIN MODAL SHARE */
   // FIN DES  MODALS
 
 
-    //-----------COMPOSANT PRESENTATION-----------//
+
+// ------------------------------------------ COMPOSANT PRESENTATION ------------------------------------------ //
 function CustomIconSwitch (props) {
-  const [checked, setChecked] = useState(false)
   const [modalShow, setModalShow] = useState(false)
   const [token, setToken] = useState(null)
   const [modalShowContact, setModalShowContact] = React.useState(false);
@@ -426,28 +426,19 @@ function CustomIconSwitch (props) {
   const [avatar, setAvatar] = useState("")
 
 
-
   useEffect(() => {
     const findToken = () => {
       setToken(props.tokenToDisplay)
-      if(props.tokenToDisplay){
-        setChecked(true)
-      }
-
-    }    
+      setAvatar(props.avatarToDisplay)
+    }
     findToken()
+  }, [props.tokenToDisplay, props.avatarToDisplay]);
 
-  }, [props.tokenToDisplay]);
 
-  // CLICK X de la modal
-  var clickCloseModal = (checkedhandle, modalShowhandle) =>{
-    setChecked(checkedhandle)
-    setModalShow(modalShowhandle)
-  };
-
+  // Avatar from Back
   if(props.tokenToDisplay){
     async function userData(){
-      const data = await fetch('/users/finduser', {
+      const data = await fetch('/users/findavatar', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `token=${props.tokenToDisplay}`
@@ -459,21 +450,37 @@ function CustomIconSwitch (props) {
     userData()
   }
 
+
+  // CLICK X de la modal
+  var clickCloseModal = (checkedhandle, modalShowhandle) =>{
+    setModalShow(modalShowhandle)
+  };
+
+  
+  // Gestion du Toggle
   var handleChange = () => {
     if(token === null){
-      setChecked(true)
       setModalShow(true)
-      props.logout()
-      return (<Redirect to='/'/>)
     } else {
-      setChecked(false)
       setModalShow(false)
       setToken(null)
+      props.logout()
+      setAvatar("")
+      return (<Redirect to='/'/>)
     }
   };
 
-
-
+  var logOut = () => {
+    setToken(null)
+    props.logout()
+    setAvatar("")
+    return (<Redirect to='/'/>)
+  };
+  
+  console.log("props token ", props.tokenToDisplay);
+  console.log("props.avatarToDisplay",props.avatarToDisplay);
+  
+  
   
   //____________________________ RETURN _________________________________
   return(
@@ -523,8 +530,19 @@ function CustomIconSwitch (props) {
         <Col style={{display:"flex", flexDirection:"row-reverse", alignItems: "center", justifyItems:"center" }}>
           {/* passage en row-reverse pour aligner sur la droite. Il faut donc insérer les éléments à l'inverse dans le code ! */}
         
+
         {/* TOGGLE DE CONNEXION */}
-          <label htmlFor="icon-switch" style={{paddingLeft:10, }}>
+        {/* <div className="react-switch" >
+          <Switch
+            width={100}
+            height={50}
+            id="icon-switch"
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined style={{color:'red'}}/>}
+            onClick={()=> handleChange()}
+          />
+        </div> */}
+          {/* <label htmlFor="icon-switch" style={{paddingLeft:10, }}>
             <Switch 
             width={100}
             height={50}
@@ -553,8 +571,15 @@ function CustomIconSwitch (props) {
               className="react-switch"
               id="icon-switch"
             />
-          </label>
+          </label> */}
           {/*fin  TOGGLE DE CONNEXION */}
+
+
+          {avatar=== '' ?
+                <Button color="danger" onClick={()=>handleChange()}>Connexion</Button> 
+                : 
+                <img src={logout} style={{color:"#F9F5FF" ,height:20, paddingLeft:6 }} onClick={()=>logOut()} alt=""/>
+              } 
 
           {/* Menu */}
             <UncontrolledDropdown direction="left" style={{paddingLeft: 10}}>
@@ -575,17 +600,25 @@ function CustomIconSwitch (props) {
                   Politique de confidentialité
                 </DropdownItem>
                 <DropdownItem onClick={() => setModalShowMention(true)} style={{ paddingTop:10, cursor:"pointer", }}>
-                Mention Légales
+                  Mentions Légales
                 </DropdownItem>
 
               </DropdownMenu>
             </UncontrolledDropdown>
           {/*fin Footer */}
 
-            <Link to="/ScreenUser">
-              <img style={{height:50, width:50, paddingTop: "0.25rem"}} src={avatar} alt=""/>
-            </Link>
-      </Col>
+            
+              {avatar=== '' ?
+                ''
+                : 
+                <div>
+                  <Link to="/ScreenUser">
+                    <img style={{height:50, width:50, paddingTop: "0.30rem"}} src={avatar} alt=""/> 
+                  </Link>
+                  
+                </div>
+              } 
+      </Col>      
     </nav>
   </div>
   );
@@ -595,7 +628,7 @@ function CustomIconSwitch (props) {
 
 
   function mapStateToProps(state){
-    return {tokenToDisplay: state.token}
+    return {tokenToDisplay: state.token, avatarToDisplay: state.avatar}
   }
 
 function mapDispatchToProps(dispatch){
@@ -605,6 +638,12 @@ function mapDispatchToProps(dispatch){
     },
     logout: function(token) {
       dispatch({type: 'removeToken', token})
+    },
+    newAvatar: function(avatar) {
+      dispatch({type: 'addavatar', avatar})
+    },
+    userAvatar: function(avatar) {
+      dispatch({type: 'getavatar', avatar})
     }
   }
 }

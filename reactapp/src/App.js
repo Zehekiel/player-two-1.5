@@ -1,8 +1,8 @@
-
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 //routes
   import Header from "./Components/Header"
   import ScreenHome from '../../reactapp/src/Components/ScreenHome';
@@ -14,12 +14,14 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
     // import ScreenteamView from './Components/ScreenteamView';
   import ScreenUser from './Components/ScreenUser';
   import ScreenMatchPage from './Components/ScreenMatchPage';
+  
 //redux
   import token from './reducer/token'
   import game from './reducer/game'
+  import avatar from './reducer/avatar'
   import {Provider} from 'react-redux'
   import {createStore, combineReducers} from 'redux'
-  const store = createStore(combineReducers({game, token}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  const store = createStore(combineReducers({game, token, avatar}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 function App() {

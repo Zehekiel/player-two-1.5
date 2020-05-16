@@ -30,10 +30,10 @@ a:hover{
   color: #F9F5FF;
   position: absolute;
   top: 50%;
-  left: 15px;
-  text-align: center;
+  left: 10px;
+
   color: #F9F5FF;
-  font-size:14px;
+  font-size: 14px;
   text-shadow: 0px 4px 4px rgba(144, 14, 205, 0.8);
 
 }
@@ -41,18 +41,19 @@ a:hover{
 .p2Button{
   font-family:  'Comfortaa', cursive;
   position: relative;
+  left: 50%;
   color: #F9F5FF;
   font-weight: bold;
-  transform-origin: center center;
+
 } 
 
-.animationP2Button{
+/* .animationP2Button{
   animation-name: slidein;
   Animation-delay : 0s ;
   Animation-duration : 10s ;
   animation-direction: alternate-reverse;
   Animation-iteration-count : infinite ;
-}
+} */
 
 
 
