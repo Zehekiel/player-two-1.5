@@ -88,7 +88,7 @@ function ScreenUser(props) {
     const [userManagementModal,setuserManagementModal] = useState(false)
     const [nestedModal, setNestedModal] = useState(false);
     const [modalAvatar, setModalAvatar] = React.useState(false);
-    const [closeAll, setCloseAll] = useState(false);
+    
   //Listes
     const [listSuccess, setListSuccess] = useState([])
     const [listErrors, setListErrors] = useState([])
@@ -199,8 +199,9 @@ function ScreenUser(props) {
     const toggleAll = () => {
       setNestedModal(!nestedModal);
       setListSuccess([])
-      setCloseAll(true);
     }
+
+
     if(listSuccess.length>0){
       var ListSuccessMap = listSuccess[0]
       var tabListSuccess = ListSuccessMap.map((success,i) => {
@@ -212,6 +213,7 @@ function ScreenUser(props) {
         
         )
       })
+      
     }
 
 
@@ -235,7 +237,7 @@ function ScreenUser(props) {
           </ModalBody>
       
           <ModalFooter style={{backgroundColor: '#010212', color:"#F9F5FF",borderRadius: "0px 0px 100px 0px" ,justifyContent:"center"}}>
-            <Button color="secondary" outline onClick={toggleAll}>Fermer</Button>
+            <Button color="secondary" outline onClick={()=>toggleAll()}>Fermer</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -303,7 +305,6 @@ function ScreenUser(props) {
     const toggleNested = () => {
       setNestedModal(!nestedModal);
       setuserManagementModal(false)
-      setCloseAll(false);
     }
 
     async function clickValider(){

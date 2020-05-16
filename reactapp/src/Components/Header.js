@@ -82,14 +82,14 @@ import {connect} from 'react-redux';
             </Button>
           </Modal.Header>
 
-          <Modal.Body className="modalbody-footer">
-            <Input onChange={(e) => setSignInEmailPseudo(e.target.value)} type="text" required placeholder="Email ou Pseudo" style={{width: 600}}/>
-            <Input onChange={(e) => setSignInPassword(e.target.value)} type="password" required placeholder="Mot de passe" style={{width: 600}}/>
+          <Modal.Body className="modalbody-footer" style={{paddingLeft: '30%'}}>
+            <Input onChange={(e) => setSignInEmailPseudo(e.target.value)} type="text" required placeholder="Email ou Pseudo" style={{width: '60%'}}/>
+            <Input onChange={(e) => setSignInPassword(e.target.value)} type="password" required placeholder="Mot de passe" style={{width: '60%'}}/>
             {tabErrorsSignIn}
           </Modal.Body>
 
           <Modal.Footer style={{}}>
-            <Button onClick={() => handleSubmitSignIn()} size="sm">Connexion</Button>
+            <Button onClick={() => handleSubmitSignIn()} size="sm" >Connexion</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -426,6 +426,8 @@ function CustomIconSwitch (props) {
   const [avatar, setAvatar] = useState("")
 
 
+
+
   useEffect(() => {
     const findToken = () => {
       setToken(props.tokenToDisplay)
@@ -433,6 +435,8 @@ function CustomIconSwitch (props) {
     }
     findToken()
   }, [props.tokenToDisplay, props.avatarToDisplay]);
+
+
 
 
   // Avatar from Back
@@ -451,12 +455,16 @@ function CustomIconSwitch (props) {
   }
 
 
+
+
   // CLICK X de la modal
   var clickCloseModal = (checkedhandle, modalShowhandle) =>{
     setModalShow(modalShowhandle)
   };
 
-  
+
+
+
   // Gestion du Toggle
   var handleChange = () => {
     if(token === null){
@@ -470,18 +478,19 @@ function CustomIconSwitch (props) {
     }
   };
 
+
+
+
   var logOut = () => {
     setToken(null)
     props.logout()
     setAvatar("")
     return (<Redirect to='/'/>)
   };
-  
-  console.log("props token ", props.tokenToDisplay);
-  console.log("props.avatarToDisplay",props.avatarToDisplay);
-  
-  
-  
+
+
+
+
   //____________________________ RETURN _________________________________
   return(
     <div>
@@ -576,7 +585,7 @@ function CustomIconSwitch (props) {
 
 
           {avatar=== '' ?
-                <Button color="danger" onClick={()=>handleChange()}>Connexion</Button> 
+                <Button onClick={()=>handleChange()} id='connexion'>Connexion</Button> 
                 : 
                 <img src={logout} style={{color:"#F9F5FF" ,height:20, paddingLeft:6 }} onClick={()=>logOut()} alt=""/>
               } 

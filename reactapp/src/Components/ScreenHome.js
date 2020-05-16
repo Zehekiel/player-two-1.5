@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import {Button, Card, CardColumns, FormGroup, Modal,Row, Col} from 'react-bootstrap'  ; 
+import {Button, Card, CardColumns, Modal,Row, Col} from 'react-bootstrap'  ; 
 import threeDots from '../images/three_dots.svg';
 
 
@@ -255,13 +255,13 @@ function ScreenHome() {
     />
 
 
-      <FormGroup className="p2Button" style={{margin:0, paddingTop:25,}}>
+      <div className="p2Button" style={{margin:0, paddingTop:25,width:200}}>
         <Link to="screenidentity">
           {/* <div className="invader"></div> */}
           <img style={{height:"180px", width:"200px",}}  src={require('../images/button.svg')} alt="button start"/>
           <p  className="textP2Button ">Find your Player Two </p>
         </Link>
-      </FormGroup>
+      </div>
 
 
     <CardColumns style={{paddingTop:25}}>
