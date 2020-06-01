@@ -141,7 +141,7 @@ function ScreenUser(props) {
   var max = myArticlesList.length > 4? 4 : myArticlesList.length;
   for( var q=0; q<max ; q++){
     cardArticle.push(
-      <div key={q} style={{padding: 5, color: 'white', backgroundColor: '#010212', borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0}}>
+      <div key={q} style={{padding: 5, color: 'white', borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0}}>
         <a target="_blank" href={myArticlesList[q].link} rel="noopener noreferrer" style={{display: "flex", textDecoration: "none"}}>
           <img width="25%" src={myArticlesList[q].image} style={{borderRadius: "10px"}} alt=""/>
           <div style={{alignSelf: "center", fontSize: "13px", padding: 5}}>
@@ -553,7 +553,7 @@ function ScreenUser(props) {
 
       <Col>
         {/*__________ MES PLAYER TWO __________*/}
-        <Container className="card-background" style={{boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor:"#010212", marginTop:"-10px", paddingBottom: "20px", marginBottom: "20px"}}>
+        <Container className="card-background" style={{boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", marginTop:"-10px", paddingBottom: "20px", marginBottom: "20px"}}>
           <Card style={{ borderRadius:"0 50", backgroundColor:"transparent", marginTop: "10px"}}>
             <CardTitle style={{ alignSelf: 'center', }} >Mes Player Two 
               <Link to="/screenmatchpage"> 

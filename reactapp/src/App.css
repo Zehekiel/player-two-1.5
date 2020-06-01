@@ -26,15 +26,7 @@ a:hover{
   color: #F9F5FF;
 }
 
-.textP2Button {
-  color: #F9F5FF;
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  color: #F9F5FF;
-  font-size: 14px;
-  text-shadow: 0px 4px 4px rgba(144, 14, 205, 0.8);
-}
+
 
 #connexion{
   font-size: 14px;
@@ -43,14 +35,25 @@ a:hover{
   border-radius: 0px 0px 15px 0px;
 }
 
+
+
 .p2Button{
+  text-align: center;
   font-family:  'Comfortaa', cursive;
-  position: relative;
-  left: 50%;
   color: #F9F5FF;
   font-weight: bold;
-
 } 
+
+.textP2Button {
+  color: #F9F5FF;
+  position: absolute;
+  top: 18%;
+  margin: 0px 45% 0px 43%;
+  text-align: center;
+  color: #F9F5FF;
+  font-size: 14px;
+  text-shadow: 0px 4px 4px rgba(144, 14, 205, 0.8);
+}
 
 /* .animationP2Button{
   animation-name: slidein;
@@ -163,7 +166,7 @@ a:hover{
   transition-timing-function: steps(8, end);
 } */
 
-@keyframes slidein {
+/* @keyframes slidein {
   
   from {
     margin-left: 10%;
@@ -171,7 +174,7 @@ a:hover{
   to {
     margin-left: 80%;
   }
-}
+} */
 
 .textScreenGameButton {
   position: absolute;
@@ -225,12 +228,15 @@ div{
   padding: 0px;
 }
 
+
+
 .backgroundColor{
   min-height: 92vh;
   padding: 15px;
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 40%, rgba(84,5,119,1) 70%, rgba(2,0,36,1) 100%);
+  background: linear-gradient(35deg, #161616,#4d4d4d, #cfcfcf);
 }
+
+
 
 .headerFooter{
   min-height: 8vh;
@@ -257,20 +263,20 @@ body {
   color: #F9F5FF;
 }
 .heading {
-  font-family: 'Press Start 2P', cursive;
+
   color: #F9F5FF;
   align-items: center;
   justify-content: center;
   /* margin: 0;
   padding: 0; */
-  Font-Size: 23px;
+  Font-Size: 35px;
   text-shadow: 0px 4px 4px rgba(231, 10, 10, 0.7);
 }
 
 .titleTeam{
   width: 100%;
   flex-direction: row;
-  font-family: 'Press Start 2P', cursive;
+
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
@@ -278,13 +284,13 @@ body {
 
 .card{
   height: auto;
-  background-color: #010212;
-  border-radius: 0px 50px;
+  border-radius: 0px 50px !important;
   font-family: 'Comfortaa', cursive;
-  color: #F9F5FF;
+  color: #6c757d;
   padding-bottom: 13px;
-  box-shadow: 8px rgba(144, 14, 205, 0.8);
-  padding: 10px
+  box-shadow:0px 4px 4px rgba(144, 14, 205, 0.8);
+  padding: 10px;
+  background-color: #000000 !important;
 }
 
 .lastcard{
@@ -299,9 +305,9 @@ body {
 }
 
 .card-title{
-  font-family: 'Press Start 2P', cursive;
-  Font-Size: 20px !important;
-  color: #F9F5FF;
+
+  Font-Size: 27px !important;
+  color: #ffffff;
   margin: 0 ;
   padding: 0;
   align-content: center;
@@ -311,21 +317,26 @@ body {
 .card-subtitle{
   font-family: 'Press Start 2P' !important;
   font-size: 12px;
-  color: #F9F5FF;
+  color: rgb(255, 255, 255);
   margin-left : 10px;
 }
 
 p.card-subtitle{
-  font-family: 'Press Start 2P', cursive;
+
   font-size: 10px;
   color: #F9F5FF;
   margin-left : 10px;
 }
+
+
 .card-text{
   font-family:  'Comfortaa', cursive;
-  margin-left : 10px;
+  margin-left : 11px;
   font-size: 15px;
+  color: #F9F5FF;
 }
+
+
 
 .cardbody{
   padding-bottom: "15px";
@@ -348,7 +359,7 @@ p.card-subtitle{
 }
 
 .card-background{
-  background: #060122;
+  background: #000000;
   border-radius: 0px 50px;
   padding: 15px
 }
@@ -424,6 +435,15 @@ element.style{
     box-shadow: 0px 4px 4px rgba(231, 10, 10, 0.7);
 }
 
+
+.modal-text-game{
+    font-family:  'Comfortaa', cursive;
+    margin-left : 40px;
+    font-size: 15px;
+    color: #F9F5FF;
+}
+
+
 .false{
   transform: rotate(180deg);
   width:25px !important;
@@ -467,7 +487,7 @@ element.style{
   color: white ;
   background-color: #010212;
   justify-content: center;
-  font-family: 'Press Start 2P', cursive;
+
   text-shadow: 0px 4px 4px rgba(144, 14, 205, 0.8);
 
 }
@@ -534,7 +554,7 @@ button.btn.btn-outline-secondary{
   border-Radius: 0px 0px 40px 40px;
   padding: 7px;
   color: white;
-  background-Color: #010212;
+  background-Color: #07070c;
   border-Bottom: 1px solid #A58CA3;
 }
 
@@ -546,7 +566,7 @@ button.btn.btn-outline-secondary{
   border-Radius: 0px 0px 40px 40px;
   padding: 0px 0px 4px 4px;
   color: white;
-  background-Color: #010212;
+  background-Color: #07070c;
   border-Bottom: 1px solid #A58CA3;
 }
 
@@ -636,3 +656,11 @@ button.btn.btn-outline-secondary{
     box-shadow: none;
 
   } */
+
+  .backgroundLight{
+    background-color: cornsilk;
+  }
+
+  .backgroundDark{
+    background-color: rgb(41, 41, 41);
+  }

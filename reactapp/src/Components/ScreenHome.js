@@ -14,14 +14,14 @@ function MyVerticallyCenteredModal(props) {
       centered
       style={{boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", }}
     >
-      <Modal.Header style={{backgroundColor: '#010212', boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)"}}>
-        <Modal.Title id="contained-modal-title-vcenter" style={{color: 'white', backgroundColor: '#010212', }}> 
+      <Modal.Header >
+        <Modal.Title id="contained-modal-title-vcenter" > 
         Qui sommes-nous ?
         </Modal.Title>
-        <Button style={{color: 'white', backgroundColor: '#010212', justifyContent: 'right', border: 0,}} onClick={props.onHide}> <img src={require('../images/cross_modal.svg')} alt="modal cross"/></Button>
+        <Button  onClick={props.onHide}> <img src={require('../images/cross_modal.svg')} alt="modal cross"/></Button>
       </Modal.Header>
 
-      <Modal.Body style={{color: 'white', backgroundColor: '#010212', borderRadius: "0px 0px 90px 40px",boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)"}}>
+      <Modal.Body >
         <h4>Player Two</h4>
         <p>En 2020, nous avons créé Player Two à destination des Gamers. Nous pensions qu’il fallait répondre à une vraie demande venant de tous ces Gamers et Gameuses qui cherchent leur Player Two.</p>
         <p>Ensuite, il a été nécessaire d’apporter une réponse personnalisée à toutes les demandes que nous recevions. Nous avons donc mis en place notre système de matching afin de trouver le joueur qui vous correspond.</p>
@@ -67,8 +67,7 @@ function ArticlesModal(props) {
           <a  href={article.link} target="_blank" rel="noopener noreferrer" style={{display: "flex", textDecoration: "none", }}>
             <img width="30%" style={{borderRadius:"0px 0px 0px 30px"}}  src={article.image} alt="" />
             <div style={{alignSelf: "center"}}>
-              <p style={{margin: 15, color: 'white'}}>{article.title}</p>
-              {/* <p style={{margin: 15, marginBottom: 0, color: 'white'}}>{article.subTitle}</p> */}
+              <p className='card-text'>{article.title}</p>
             </div>
           </a>
       </div>
@@ -122,9 +121,9 @@ function PopularGamesModal(props) {
           <div  target="_blank" href={article.link} style={{display: "flex", textDecoration: "none"}}>
             <img width="15%" height="15%" src={article.image} alt="" style={{borderRadius:"0px 0px 0px 30px"}}/>
             <div style={{alignSelf: "center"}}>
-              <p style={{marginLeft: 35, color: 'white'}}>{article.title}</p>
-              <p style={{marginLeft: 35, color: 'white'}}>{article.category}</p>
-              <p style={{marginLeft: 35, marginBottom: 0, color: 'white'}}>{article.tag}</p>
+              <p className='modal-text-game'>{article.title}</p>
+              <p className='modal-text-game'>{article.category}</p>
+              <p className='modal-text-game'>{article.tag}</p>
             </div>
           </div>
       </div>
@@ -195,12 +194,11 @@ function ScreenHome() {
   var max = articlesList.length > 2? 2 : articlesList.length;
   for( var i=0; i<max ; i++){
     cardArticle.push(
-      <div key={i} style={{padding: 7, color: 'white', backgroundColor: '#010212', borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0,  alignSelf: "center"}}>
+      <div key={i} style={{padding: 7, borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0,  alignSelf: "center"}}>
         <a  href={articlesList[i].link} target="_blank" rel="noopener noreferrer"style={{display: "flex", textDecoration: "none"}}>
           <img style={{borderRadius:"10px", margin: "2.5% 0%"}} height="40%" width="40%" src={articlesList[i].image} alt=""/>
           <div style={{alignSelf: "center", fontSize: "13px"}}>
-            <p style={{marginLeft: 20, marginBottom: 0, color: 'white'}}>{articlesList[i].title}</p>
-            {/* <span style={{marginLeft: 25, marginBottom: 0, color: 'white'}}>{articlesList[i].subTitle}</span> */}
+            <p style={{marginLeft: 20, marginBottom: 0}} className='card-text'>{articlesList[i].title}</p>
           </div>
         </a>
       </div>
@@ -212,11 +210,11 @@ function ScreenHome() {
   var maxtop = top5.length > 5? 5 : top5.length;
   for( var u=0; u<maxtop ; u++){
     top5Array.push(
-      <Row key={u} style={{padding:7 , color: 'white', backgroundColor: '#010212', borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0, paddingLeft: 0, paddingRight: 0}}>
+      <Row key={u} style={{padding:7 , borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0, paddingLeft: 0, paddingRight: 0}}>
         <img style={{borderRadius:10,}}  height="20%" width="20%" src={top5[u].cover} alt=""/>
         <Col style={{alignSelf: "center", fontSize: "13px"}}>
-          <Row style={{marginLeft: 20, color: 'white'}}>{top5[u].name}</Row>
-          <Row style={{marginLeft: 20, color: 'white', fontStyle:"italic"}}>{top5[u].plateforme}</Row>
+          <Row style={{marginLeft: 20}} className='card-text'>{top5[u].name}</Row>
+          <Row style={{marginLeft: 20, fontStyle:"italic"}}className='card-text' >{top5[u].plateforme}</Row>
         </Col>
       </Row>
     )
@@ -227,12 +225,11 @@ function ScreenHome() {
   var maxpo = popularGamesList.length > 4? 4 : popularGamesList.length;
   for( var v=0; v<maxpo ; v++){
     cardPopularGames.push(
-      <div key={v} style={{padding:7 , color: 'white', backgroundColor: '#010212', borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0, paddingLeft: 0, paddingRight: 0}}>
+      <div key={v} style={{padding:7 , color: 'black', borderBottom: "1px solid #A58CA3", borderTop: "1px solid #A58CA3", margin: 0, paddingLeft: 0, paddingRight: 0}}>
         <a  href={popularGamesList[v].link} target="_blank" rel="noopener noreferrer" style={{display: "flex", textDecoration: "none"}}>
           <img style={{borderRadius:10,}}  height="20%" width="20%" src={popularGamesList[v].image} alt=""/>
           <div style={{alignSelf: "center", fontSize: "13px"}}>
-            <span style={{marginLeft: 20, color: 'white'}}>{popularGamesList[v].title}</span>
-            {/* <span style={{marginLeft: 20, color: 'white'}}>{popularGamesList[v].category}</span> */}
+            <span style={{marginLeft: 20}} className='card-text'>{popularGamesList[v].title}</span>
           </div>
         </a>
       </div>
@@ -255,11 +252,10 @@ function ScreenHome() {
     />
 
 
-      <div className="p2Button" style={{margin:0, paddingTop:25,width:200}}>
+      <div className="p2Button" >
         <Link to="screenidentity">
-          {/* <div className="invader"></div> */}
           <img style={{height:"180px", width:"200px",}}  src={require('../images/button.svg')} alt="button start"/>
-          <p  className="textP2Button ">Find your Player Two </p>
+          <p  className="textP2Button "> Find your Player Two </p>
         </Link>
       </div>
 
@@ -267,14 +263,14 @@ function ScreenHome() {
     <CardColumns style={{paddingTop:25}}>
 
     {/*  Modal qui sommes-nous ? */}
-    <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
+    <Card>
       <Card.Body>
         <Card.Title style={{cursor: "pointer"}} onClick={() => setModalShow(true)}>Qui sommes-nous ?</Card.Title>
         </Card.Body>
     </Card>
 
     {/* JEUX PRISE */}
-    <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
+    <Card >
       <Card.Body>
         <Card.Title>Top 5 sur Player 2</Card.Title>
         <br></br>
@@ -283,9 +279,9 @@ function ScreenHome() {
     </Card>
 
 
-    <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
+    <Card >
       <Card.Body>
-        <Card.Title>Quesaco</Card.Title>
+        <Card.Title>Mode d'emploi</Card.Title>
         <Card.Text style={{font: 'comfortaa'}}>
         C'est plus simple que ça en à l'air : <br/>
         Tu cliques sur le bouton "Find your Player Two" en haut puis tu te connectes ensuite tu cherches un jeu et tu trouves ceux qui jouent au même jeu que toi. <br/> 
@@ -295,8 +291,8 @@ function ScreenHome() {
     </Card>
 
 
-    <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
-      <Card.Body style={{paddingBottom: 0}}>
+    <Card >
+      <Card.Body >
         <Card.Title>Jeux populaires</Card.Title>
         <br></br>
 
@@ -313,7 +309,7 @@ function ScreenHome() {
 
 
 
-    <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
+    <Card >
       <Card.Body>
         <Card.Title>Notre philosophie</Card.Title>
         <Card.Text> 
@@ -325,7 +321,7 @@ function ScreenHome() {
 
   {/* Actualités du jeu vidéo */}
 
-    <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
+    <Card>
       <Card.Body style={{paddingBottom: 0}}>
         <Card.Title>Actualités du jeu vidéo</Card.Title>
       <br></br>
@@ -345,7 +341,7 @@ function ScreenHome() {
 
 
 
-      <Card style={{ boxShadow:"0px 4px 4px rgba(144, 14, 205, 0.8)", backgroundColor: '#010212', borderRadius: "0px 50px" }}>
+      <Card >
         <Card.Body>
           <Card.Title>Actu Player 2</Card.Title>
           <Card.Text>
