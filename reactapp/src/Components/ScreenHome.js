@@ -255,8 +255,8 @@ function ScreenHome() {
       <div className="p2Button" >
         <Link to="screenidentity">
           <img style={{height:"180px", width:"200px",}}  src={require('../images/button.svg')} alt="button start"/>
-          <p  className="textP2Button "> Find your Player Two </p>
         </Link>
+        <p  className="textP2Button "> Find your Player Two </p>
       </div>
 
 

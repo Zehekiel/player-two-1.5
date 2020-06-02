@@ -47,9 +47,9 @@ a:hover{
 .textP2Button {
   color: #F9F5FF;
   position: absolute;
-  top: 18%;
-  margin: 0px 45% 0px 43%;
-  text-align: center;
+  top:170px;
+  left: 49%;
+  transform: translate(-50%, -50%);
   color: #F9F5FF;
   font-size: 14px;
   text-shadow: 0px 4px 4px rgba(144, 14, 205, 0.8);
